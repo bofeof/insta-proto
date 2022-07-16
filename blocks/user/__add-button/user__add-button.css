@@ -1,0 +1,13 @@
+.user__add-button {
+  width: 150px;
+  height: 50px;
+  padding: 0;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  background-color: #2a2c2f;
+  background-image: url(/images/add/add.svg);
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+  align-self: center;
+}

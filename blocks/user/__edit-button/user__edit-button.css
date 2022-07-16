@@ -1,0 +1,13 @@
+.user__edit-button {
+  padding: 0;
+  margin-left: 18px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  background-color: #2a2c2f;
+  background-image: url(/images/edit/edit.svg);
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+}

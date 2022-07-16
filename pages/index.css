@@ -1,0 +1,85 @@
+@import url(/vendor/normalize.css);
+@import url(/vendor/fonts.css);
+
+/* PAGE */
+@import url(/blocks/page/page.css);
+@import url(/blocks/page//_theme/page_theme_dark.css);
+
+/* HEADER */
+@import url(/blocks/header/header.css);
+
+/* CONTENT */
+@import url(/blocks/content/content.css);
+
+/* USER */
+@import url(/blocks/user/user.css);
+@import url(/blocks/user/__avatar/user__avatar.css);
+@import url(/blocks/user/__info/user__info.css);
+@import url(/blocks/user/__name/user__name.css);
+@import url(/blocks/user/__job/user__job.css);
+
+@import url(/blocks/user/__edit-button/user__edit-button.css);
+@import url(/blocks/user/__add-button/user__add-button.css);
+
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  gap: 20px 17px;
+  margin-bottom: 66px;
+}
+
+.gallery__item {
+  height: 361px;
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+
+.gallery__item-photo{
+  max-width: 100%;
+  max-height: 282px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery__item-description{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px 0 21px;
+  margin:25px 0 0;
+  box-sizing: border-box;
+}
+
+.gallery__item-name{
+  margin: 0;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.gallery__like-botton{
+  padding: 0;
+  margin-left: 18px;
+  width: 24px;
+  height: 24px;
+  border:none;
+  background-color: #ffffff;
+  background-image: url(/images/like/like-disabled.svg);
+  background-size: 22px 19px;
+  background-repeat: no-repeat;
+  background-position: center;
+  align-self: center;
+}
+
+
+.footer{
+width: 880px;
+margin: 0 auto;
+}
