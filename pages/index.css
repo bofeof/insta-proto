@@ -3,7 +3,8 @@
 
 /* PAGE */
 @import url(/blocks/page/page.css);
-@import url(/blocks/page//_theme/page_theme_dark.css);
+@import url(/blocks/page/_theme/page_theme_dark.css);
+@import url(/blocks/page/__content/page__content.css);
 
 /* HEADER */
 @import url(/blocks/header/header.css);
@@ -17,69 +18,28 @@
 @import url(/blocks/user/__info/user__info.css);
 @import url(/blocks/user/__name/user__name.css);
 @import url(/blocks/user/__job/user__job.css);
+@import url(/blocks/user/__header/user__header.css);
 
 @import url(/blocks/user/__edit-button/user__edit-button.css);
 @import url(/blocks/user/__add-button/user__add-button.css);
 
+/* FOOTER */
+@import url(/blocks/footer/footer.css);
 
 /* GALLERY */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 282px);
-  gap: 20px 17px;
-  margin-bottom: 66px;
-}
+@import url(/blocks/gallery/gallery.css);
+@import url(/blocks/gallery/__item/gallery__item.css);
+@import url(/blocks/gallery/__item-photo/gallery__item-photo.css);
+@import url(/blocks/gallery/__item-description/gallery__item-description.css);
+@import url(/blocks/gallery/__item-name/gallery__item-name.css);
+@import url(/blocks/gallery/__like-botton/gallery__like-botton.css);
 
-.gallery__item {
-  height: 361px;
-  background: #FFFFFF;
-  border-radius: 10px;
-}
-
-.gallery__item-photo{
-  max-width: 100%;
-  max-height: 282px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.gallery__item-description{
-  display: flex;
-  justify-content: space-between;
-  padding: 0 15px 0 21px;
-  margin:25px 0 0;
-  box-sizing: border-box;
-}
-
-.gallery__item-name{
-  margin: 0;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
-  color: #000000;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.gallery__like-botton{
-  padding: 0;
-  margin-left: 18px;
-  width: 24px;
-  height: 24px;
-  border:none;
-  background-color: #ffffff;
-  background-image: url(/images/like/like-disabled.svg);
-  background-size: 22px 19px;
-  background-repeat: no-repeat;
-  background-position: center;
-  align-self: center;
-}
-
-
-.footer{
-width: 880px;
-margin: 0 auto;
-}
+/* POPUP */
+@import url(/blocks/popup/popup.css);
+@import url(/blocks/popup/_opened/popup_opened.css);
+@import url(/blocks/popup/__close-button/popup__close-button.css);
+@import url(/blocks/popup/__save-button/popup__save-button.css);
+@import url(/blocks/popup/__container/popup__container.css);
+@import url(/blocks/popup/__form-header/popup__form-header.css);
+@import url(/blocks/popup/__form/popup__form.css);
+@import url(/blocks/popup/__input/popup__input.css);

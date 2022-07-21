@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="./pages/index.css" />
   <title>Mesto</title>
 </head>
-<body class="page page_theme_dark">
+<body class="page page_theme_dark page__content">
 
   <header class="header">
-    <img src="./images/logo/logo-white.svg" alt="Место. Логотип">
+    <!-- <img src="./images/logo/logo-white.svg" alt="Место. Логотип"> -->
   </header>
 
   <main class="content">
@@ -19,7 +19,10 @@
       <div class="user__info">
         <img class="user__avatar" src="./images/avatar.jpg" alt="Фото пользователя">
         <div>
-          <h1 class="user__name">Жак-Ив Кусто<button class="user__edit-button"></button></h1>
+          <div class="user__header">
+            <h1 class="user__name">Жак-Ив Кусто</h1>
+            <button class="user__edit-button"></button>
+          </div>
           <h2 class="user__job">Исследователь океана</h2>
         </div>
       </div>
@@ -67,6 +70,7 @@
           <button class="gallery__like-botton"></button>
         </div>
       </div>
+
       <div class="gallery__item">
         <img class="gallery__item-photo" src="./images/jaromir-kalina-rwCo2-mXSvs-unsplash.jpg" alt="Домбай">
         <div class="gallery__item-description">
@@ -74,6 +78,7 @@
           <button class="gallery__like-botton"></button>
         </div>
       </div>
+
       <div class="gallery__item">
         <img class="gallery__item-photo" src="./images/mary-brennan-s1t-ovl5HSA-unsplash.jpg" alt="Карачаево-Черкесия">
         <div class="gallery__item-description">
@@ -82,17 +87,25 @@
         </div>
       </div>
 
-
-
     </section>
 
+    <div class="popup popup_opened">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <form class="popup__form">
+          <h3 class="popup__form-header">Редактировать профиль</h3>
+          <input class="popup__input" type="text" name="username" placeholder="Имя" minlength="1" maxlength="30">
+          <input class="popup__input" type="text" name="jobinfo" placeholder="О себе" minlength="1" maxlength="30">
+          <button class="popup__save-button" type="submit" name="save">Сохранить</button>
+        </form>
+      </div>
+    </div>
 
-    <div class="popup">
   </main>
 
   <footer class="footer">© 2022 Mesto Russia</footer>
 
-
   <script src="./index.js"></script>
+
 </body>
 </html>

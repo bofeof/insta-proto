@@ -5,9 +5,25 @@
   height: 24px;
   border: 1px solid #ffffff;
   box-sizing: border-box;
-  background-color: #2a2c2f;
+  background-color: #000000;
   background-image: url(/images/edit/edit.svg);
   background-size: 10px 10px;
   background-repeat: no-repeat;
   background-position: center;
+
+  transition: opacity 0.5s ease-in-out;
+}
+
+.user__edit-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .user__edit-button {
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+    background-size: 5.25px 5.25px;
+  }
 }

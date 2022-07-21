@@ -3,3 +3,9 @@
   align-items: flex-start;
   justify-content: center;
 }
+
+@media screen and (max-width: 768px) {
+  .user__info {
+    flex-direction: column;
+  }
+}

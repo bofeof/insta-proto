@@ -1,6 +1,21 @@
 .header {
-  width: 880px;
-  height: 74px;
+  width: 100%;
+  min-height: 74px;
   border-bottom: 1px solid #545454;
-  margin: 0 auto 40px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+
+  background-image: url(/images/logo/logo-white.svg);
+  background-size: 142px 33px;
+  background-repeat: no-repeat;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    min-height: 56px;
+    background-size: 103.74px 24.4px;
+    background-position: 8px top;
+    margin-bottom: 38.25px;
+  }
 }
