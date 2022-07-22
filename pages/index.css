@@ -32,7 +32,7 @@
 @import url(../blocks/gallery/__item-photo/gallery__item-photo.css);
 @import url(../blocks/gallery/__item-description/gallery__item-description.css);
 @import url(../blocks/gallery/__item-name/gallery__item-name.css);
-@import url(../blocks/gallery/__like-botton/gallery__like-botton.css);
+@import url(../blocks/gallery/__like-button/gallery__like-button.css);
 
 /* POPUP */
 @import url(../blocks/popup/popup.css);
