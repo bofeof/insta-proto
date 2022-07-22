@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css" />
-  <title>Mesto</title>
-</head>
-<body class="page page_theme_dark page__content">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Mesto</title>
+  </head>
+  <body class="page page_theme_dark page__content">
+    <header class="header"></header>
 
-  <header class="header">
-    <!-- <img src="./images/logo/logo-white.svg" alt="Место. Логотип"> -->
-  </header>
-
-  <main class="content">
-
-    <section class="user">
-      <div class="user__info">
-        <img class="user__avatar" src="./images/avatar.jpg" alt="Фото пользователя">
-        <div>
-          <div class="user__header">
-            <h1 class="user__name">Жак-Ив Кусто</h1>
-            <button class="user__edit-button"></button>
+    <main class="content">
+      <section class="user">
+        <div class="user__info">
+          <img
+            class="user__avatar"
+            src="./images/avatar.jpg"
+            alt="Фото пользователя"
+          />
+          <div>
+            <div class="user__header">
+              <h1 class="user__name">Жак-Ив Кусто</h1>
+              <button class="user__edit-button"></button>
+            </div>
+            <h2 class="user__job">Исследователь океана</h2>
           </div>
-          <h2 class="user__job">Исследователь океана</h2>
         </div>
-      </div>
-      <button class="user__add-button"></button>
-    </section>
+        <button class="user__add-button"></button>
+      </section>
 
-    <section class="gallery">
-      <!--
+      <section class="gallery">
+        <!--
       <div class="gallery__item">
         <img class="gallery__item-photo" src="" alt="">
         <div class="gallery__item-description">
@@ -39,73 +39,110 @@
         </div>
       </div> -->
 
-      <div class="gallery__item">
-        <img class="gallery__item-photo" src="./images/alec-krum-8fWyJ6CYyec-unsplash.jpg" alt="Карачеевск">
-        <div class="gallery__item-description">
-          <p class="gallery__item-name">Карачаевск</p>
-          <button class="gallery__like-button"></button>
+        <div class="gallery__item">
+          <img
+            class="gallery__item-photo"
+            src="./images/alec-krum-8fWyJ6CYyec-unsplash.jpg"
+            alt="Карачеевск"
+          />
+          <div class="gallery__item-description">
+            <p class="gallery__item-name">Карачаевск</p>
+            <button class="gallery__like-button"></button>
+          </div>
+        </div>
+
+        <div class="gallery__item">
+          <img
+            class="gallery__item-photo"
+            src="./images/alec-krum-CVDq2sft5KY-unsplash.jpg"
+            alt="Гора Эльбрус"
+          />
+          <div class="gallery__item-description">
+            <p class="gallery__item-name">Гора Эльбрус</p>
+            <button class="gallery__like-button"></button>
+          </div>
+        </div>
+
+        <div class="gallery__item">
+          <img
+            class="gallery__item-photo"
+            src="./images/eberhard-grossgasteiger-mS1vg1AQgYo-unsplash.jpg"
+            alt="Домбай"
+          />
+          <div class="gallery__item-description">
+            <p class="gallery__item-name">Домбай</p>
+            <button class="gallery__like-button"></button>
+          </div>
+        </div>
+
+        <div class="gallery__item">
+          <img
+            class="gallery__item-photo"
+            src="./images/julien-riedel-IalbtwfA02k-unsplash.jpg"
+            alt="Гора Эльбрус"
+          />
+          <div class="gallery__item-description">
+            <p class="gallery__item-name">Гора Эльбрус</p>
+            <button class="gallery__like-button"></button>
+          </div>
+        </div>
+
+        <div class="gallery__item">
+          <img
+            class="gallery__item-photo"
+            src="./images/jaromir-kalina-rwCo2-mXSvs-unsplash.jpg"
+            alt="Домбай"
+          />
+          <div class="gallery__item-description">
+            <p class="gallery__item-name">Домбай</p>
+            <button class="gallery__like-button"></button>
+          </div>
+        </div>
+
+        <div class="gallery__item">
+          <img
+            class="gallery__item-photo"
+            src="./images/mary-brennan-s1t-ovl5HSA-unsplash.jpg"
+            alt="Карачаево-Черкесия"
+          />
+          <div class="gallery__item-description">
+            <p class="gallery__item-name">Карачаево-Черкесия</p>
+            <button class="gallery__like-button"></button>
+          </div>
+        </div>
+      </section>
+
+      <div class="popup popup_opened">
+        <div class="popup__container">
+          <button class="popup__close-button"></button>
+          <form class="popup__form">
+            <h3 class="popup__form-header">Редактировать профиль</h3>
+            <input
+              class="popup__input popup__name-input"
+              type="text"
+              name="username"
+              placeholder="Имя"
+              minlength="1"
+              maxlength="20"
+            />
+            <input
+              class="popup__input popup__job-input"
+              type="text"
+              name="jobinfo"
+              placeholder="О себе"
+              minlength="1"
+              maxlength="20"
+            />
+            <button class="popup__save-button" type="submit" name="save">
+              Сохранить
+            </button>
+          </form>
         </div>
       </div>
+    </main>
 
-      <div class="gallery__item">
-        <img class="gallery__item-photo" src="./images/alec-krum-CVDq2sft5KY-unsplash.jpg" alt="Гора Эльбрус">
-        <div class="gallery__item-description">
-          <p class="gallery__item-name">Гора Эльбрус</p>
-          <button class="gallery__like-button"></button>
-        </div>
-      </div>
+    <footer class="footer">© 2022 Mesto Russia</footer>
 
-      <div class="gallery__item">
-        <img class="gallery__item-photo" src="./images/eberhard-grossgasteiger-mS1vg1AQgYo-unsplash.jpg" alt="Домбай">
-        <div class="gallery__item-description">
-          <p class="gallery__item-name">Домбай</p>
-          <button class="gallery__like-button"></button>
-        </div>
-      </div>
-
-      <div class="gallery__item">
-        <img class="gallery__item-photo" src="./images/julien-riedel-IalbtwfA02k-unsplash.jpg" alt="Гора Эльбрус">
-        <div class="gallery__item-description">
-          <p class="gallery__item-name">Гора Эльбрус</p>
-          <button class="gallery__like-button"></button>
-        </div>
-      </div>
-
-      <div class="gallery__item">
-        <img class="gallery__item-photo" src="./images/jaromir-kalina-rwCo2-mXSvs-unsplash.jpg" alt="Домбай">
-        <div class="gallery__item-description">
-          <p class="gallery__item-name">Домбай</p>
-          <button class="gallery__like-button"></button>
-        </div>
-      </div>
-
-      <div class="gallery__item">
-        <img class="gallery__item-photo" src="./images/mary-brennan-s1t-ovl5HSA-unsplash.jpg" alt="Карачаево-Черкесия">
-        <div class="gallery__item-description">
-          <p class="gallery__item-name">Карачаево-Черкесия</p>
-          <button class="gallery__like-button"></button>
-        </div>
-      </div>
-
-    </section>
-
-    <div class="popup popup_opened">
-      <div class="popup__container">
-        <button class="popup__close-button"></button>
-        <form class="popup__form">
-          <h3 class="popup__form-header">Редактировать профиль</h3>
-          <input class="popup__input popup__name-input" type="text" name="username" placeholder="Имя" minlength="1" maxlength="30">
-          <input class="popup__input popup__job-input" type="text" name="jobinfo" placeholder="О себе" minlength="1" maxlength="30">
-          <button class="popup__save-button" type="submit" name="save">Сохранить</button>
-        </form>
-      </div>
-    </div>
-
-  </main>
-
-  <footer class="footer">© 2022 Mesto Russia</footer>
-
-  <script src="./index.js"></script>
-
-</body>
+    <script src="./index.js"></script>
+  </body>
 </html>
