@@ -25,5 +25,6 @@
     width: 18px;
     height: 18px;
     background-size: 5.25px 5.25px;
+    align-self: center;
   }
 }
