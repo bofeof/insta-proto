@@ -9,7 +9,8 @@
 
 @media screen and (max-width: 768px) {
   .user__name {
-    max-height: 26px;
+    width: 190px;
+    min-height: 26px;
     text-align: center;
     font-size: 27px;
     line-height: 33px;
