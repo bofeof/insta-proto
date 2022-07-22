@@ -5,7 +5,7 @@
   height: 24px;
   border: none;
   background-color: #ffffff;
-  background-image: url(/images/like/like-disabled.svg);
+  background-image: url(../../../images/like/like-disabled.svg);
   background-size: 22px 19px;
   background-repeat: no-repeat;
   background-position: center;
@@ -20,6 +20,6 @@
 }
 
 .gallery__like-botton:active {
-  background-image: url(/images/like/like-active.svg);
+  background-image: url(../../../images/like/like-disabled.svg);
   opacity: 1;
 }
