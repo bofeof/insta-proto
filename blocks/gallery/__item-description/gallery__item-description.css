@@ -1,7 +1,7 @@
 .gallery__item-description {
-  max-height: 23px;
   align-items: center;
   display: flex;
   justify-content: space-between;
   margin: 25px 15px 31px 21px;
+  max-height: 23px;
 }

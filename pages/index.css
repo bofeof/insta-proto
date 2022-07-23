@@ -17,7 +17,6 @@
 /* USER */
 @import url(../blocks/user/user.css);
 @import url(../blocks/user/__avatar/user__avatar.css);
-@import url(../blocks/user/__info/user__info.css);
 @import url(../blocks/user/__name/user__name.css);
 @import url(../blocks/user/__job/user__job.css);
 @import url(../blocks/user/__header/user__header.css);
