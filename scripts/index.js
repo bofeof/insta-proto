@@ -3,8 +3,8 @@ let popUpWindow = document.querySelector(".popup");
 let closePopUpButton = document.querySelector(".popup__close-button");
 
 let formElement = document.querySelector(".popup__form");
-let nameInput = document.querySelector(".popup_name-input");
-let jobInput = document.querySelector(".popup_job-input");
+let nameInput = document.querySelector(".popup__input-name");
+let jobInput = document.querySelector(".popup__input-job");
 
 let nameValue = nameInput.value;
 let jobValue = jobInput.value;
