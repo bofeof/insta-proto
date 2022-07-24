@@ -17,7 +17,7 @@
           src="./images/avatar.jpg"
           alt="Фото пользователя"
         />
-        <div>
+        <div class="user__info">
           <div class="user__header">
             <h1 class="user__name">Жак-Ив Кусто</h1>
             <button type="button" class="user__edit-button"></button>
@@ -103,9 +103,9 @@
           <button type="button" class="popup__close-button"></button>
           <div class="popup__form">
             <h3 class="popup__form-header">Редактировать профиль</h3>
-            <form name="userinfo">
+            <form name="userinfo" class="popup__form-userinfo">
               <input
-                class="popup__input popup__input-name"
+                class="popup__input popup__input_form-name"
                 type="text"
                 name="username"
                 placeholder="Имя"
@@ -113,7 +113,7 @@
                 maxlength="30"
               />
               <input
-                class="popup__input popup__input-job"
+                class="popup__input popup__input_form-job"
                 type="text"
                 name="jobinfo"
                 placeholder="О себе"

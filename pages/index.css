@@ -20,6 +20,7 @@
 @import url(../blocks/user/__name/user__name.css);
 @import url(../blocks/user/__job/user__job.css);
 @import url(../blocks/user/__header/user__header.css);
+@import url(../blocks/user/__info/user__info.css);
 
 @import url(../blocks/user/__edit-button/user__edit-button.css);
 @import url(../blocks/user/__add-button/user__add-button.css);
@@ -44,3 +45,4 @@
 @import url(../blocks/popup/__form-header/popup__form-header.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
+@import url(../blocks/popup/__form-userinfo/popup__form-userinfo.css);

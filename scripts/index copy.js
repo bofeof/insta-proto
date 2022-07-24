@@ -2,16 +2,19 @@ let editButton = document.querySelector('.user__edit-button');
 let popUpWindow = document.querySelector('.popup');
 let closePopUpButton = document.querySelector('.popup__close-button');
 
-let formElement = document.querySelector('.popup__form-userinfo');
-
+let formElement = document.querySelector('.popup__form');
 let nameInput = document.querySelector('.popup__input_form-name');
 let jobInput = document.querySelector('.popup__input_form-job');
+
+let nameValue = nameInput.value;
+let jobValue = jobInput.value;
 
 let userName = document.querySelector('.user__name');
 let userJob = document.querySelector('.user__job');
 
 function showPopUp() {
   popUpWindow.classList.add('popup_opened');
+  popUpWindow.style.display = 'flex';
 
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
@@ -19,13 +22,17 @@ function showPopUp() {
 
 function closePopUp() {
   popUpWindow.classList.remove('popup_opened');
+  popUpWindow.style.display = 'none';
 }
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
-  userName.textContent = nameInput.value;
-  userJob.textContent = jobInput.value;
+  nameValue = nameInput.value;
+  jobValue = jobInput.value;
+
+  userName.textContent = nameValue;
+  userJob.textContent = jobValue;
 
   closePopUp();
 }
