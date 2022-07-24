@@ -4,8 +4,8 @@ let closePopUpButton = document.querySelector('.popup__close-button');
 
 let formElement = document.querySelector('.popup__form-userinfo');
 
-let nameInput = document.querySelector('.popup__input_form-name');
-let jobInput = document.querySelector('.popup__input_form-job');
+let nameInput = document.querySelector('.popup__input_form_name');
+let jobInput = document.querySelector('.popup__input_form_job');
 
 let userName = document.querySelector('.user__name');
 let userJob = document.querySelector('.user__job');
