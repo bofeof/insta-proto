@@ -6,7 +6,7 @@
   border: none;
   color: #000000;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url(/images/close/close.svg);
+  background-image: url(../../../images/close/close.svg);
   background-size: 32px 32px;
   object-fit: cover;
   background-repeat: no-repeat;

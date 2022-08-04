@@ -60,9 +60,9 @@ function addLikeEvtListener(item) {
     likeButton.classList.toggle('gallery__like-button_active');
 
     if (likeButton.classList.contains('gallery__like-button_active')){
-      likeButton.style.backgroundImage = 'url(/images/like/like-active.svg)';
+      likeButton.style.backgroundImage = 'url(./images/like/like-active.svg)';
     } else {
-      likeButton.style.backgroundImage = 'url(/images/like/like-disabled.svg)';
+      likeButton.style.backgroundImage = 'url(./images/like/like-disabled.svg)';
     }
 
   })}
