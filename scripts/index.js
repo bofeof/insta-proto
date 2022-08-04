@@ -44,9 +44,6 @@ const initialCards = [
   }
 ];
 
-// event-lis for default photocards - remove and likes
-galleryContainer.querySelectorAll('.gallery__item').forEach(addRemoveEvtListener);
-galleryContainer.querySelectorAll('.gallery__item').forEach(addLikeEvtListener);
 
 function addRemoveEvtListener(item) {
   item.querySelector('.gallery__remove-button').addEventListener('click', function(evt){
@@ -69,6 +66,27 @@ function addLikeEvtListener(item) {
 
   })}
 
+  function addImgEvtListener(item) {
+    item.querySelector('.gallery__item-photo').addEventListener('click', function(evt){
+      let popUpImg = document.querySelector('.popup__img-container');
+      let imgItem = popUpImg.parentElement;
+      closePopUpButton = imgItem.querySelector('.popup__close-button');
+
+      showPopUp(imgItem);
+
+      // get data from clicked card
+      let currentCard = evt.target.parentElement;
+      let imgLink = currentCard.querySelector('.gallery__item-photo').getAttribute('src');
+      let imgCaption  =currentCard.querySelector('.gallery__item-name').textContent;
+
+      // set data to popup img
+      imgItem.querySelector('.popup__img-card').src = imgLink;
+      imgItem.querySelector('.popup__img-caption').textContent = imgCaption;
+
+      closePopUpButton.addEventListener('click', closePopUp);
+
+    })
+}
 
 // POPUP
 function showPopUp (elem) {
@@ -143,6 +161,7 @@ function generatePhotoCard(card){
 
   addRemoveEvtListener(galleryItem);
   addLikeEvtListener(galleryItem);
+  addImgEvtListener(galleryItem);
 
   addPhotoCard(galleryItem, galleryContainer);
 }
@@ -155,7 +174,11 @@ function addPhotoCard(item, container) {
 // submit photocard
 photoCard.addEventListener('submit', submitPhotoCard)
 
-// task 1
+// task 1 (sprint 5)
 initialCards.forEach(generatePhotoCard);
 
+// event-lis for default photocards - remove, likes, img
+galleryContainer.querySelectorAll('.gallery__item').forEach(addRemoveEvtListener);
+galleryContainer.querySelectorAll('.gallery__item').forEach(addLikeEvtListener);
+galleryContainer.querySelectorAll('.gallery__item').forEach(addImgEvtListener);
 
