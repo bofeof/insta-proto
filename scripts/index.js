@@ -175,13 +175,10 @@ function addPhotoCard(item, container) {
 // submit photocard
 photoCard.addEventListener('submit', submitPhotoCard)
 
-
-
 // event-lis for default photocards - remove, likes, img
 galleryContainer.querySelectorAll('.gallery__item').forEach(addRemoveEvtListener);
 galleryContainer.querySelectorAll('.gallery__item').forEach(addImgEvtListener);
 galleryContainer.querySelectorAll('.gallery__item').forEach(addLikeEvtListener);
-
 
 // task 1 (sprint 5)
 initialCards.forEach(generatePhotoCard);
