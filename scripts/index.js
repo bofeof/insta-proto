@@ -53,6 +53,7 @@ function addRemoveEvtListener(item) {
 
 function addLikeEvtListener(item) {
   item.querySelector('.gallery__like-button').addEventListener('click', function(evt){
+    evt.preventDefault();
     let card = evt.target.closest('.gallery__item');
 
     let likeButton = card.querySelector('.gallery__like-button');
@@ -174,11 +175,13 @@ function addPhotoCard(item, container) {
 // submit photocard
 photoCard.addEventListener('submit', submitPhotoCard)
 
-// task 1 (sprint 5)
-initialCards.forEach(generatePhotoCard);
+
 
 // event-lis for default photocards - remove, likes, img
 galleryContainer.querySelectorAll('.gallery__item').forEach(addRemoveEvtListener);
-galleryContainer.querySelectorAll('.gallery__item').forEach(addLikeEvtListener);
 galleryContainer.querySelectorAll('.gallery__item').forEach(addImgEvtListener);
+galleryContainer.querySelectorAll('.gallery__item').forEach(addLikeEvtListener);
 
+
+// task 1 (sprint 5)
+initialCards.forEach(generatePhotoCard);
