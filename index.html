@@ -29,76 +29,86 @@
 
       <section aria-label="Галлерея мест">
         <ul class="gallery">
-            <li class="gallery__item">
-              <img
-                class="gallery__item-photo"
-                src="./images/alec-krum-8fWyJ6CYyec-unsplash.jpg"
-                alt="Карачеевск и человек на горизонте"
-              />
-              <div class="gallery__item-description">
-                <h2 class="gallery__item-name">Карачаевск</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
+          <li class="gallery__item">
+            <button type="button" class="gallery__remove-button"></button>
+            <img
+              class="gallery__item-photo"
+              src="./images/alec-krum-8fWyJ6CYyec-unsplash.jpg"
+              alt="Карачеевск и человек на горизонте"
+            />
+            <div class="gallery__item-description">
+              <h2 class="gallery__item-name">Карачаевск</h2>
+              <button type="button" class="gallery__like-button"></button>
+            </div>
+          </li>
+
+          <li class="gallery__item">
+            <button type="button" class="gallery__remove-button"></button>
+            <img
+              class="gallery__item-photo"
+              src="./images/alec-krum-CVDq2sft5KY-unsplash.jpg"
+              alt="Гора Эльбрус в солнечный день"
+            />
+            <div class="gallery__item-description">
+              <h2 class="gallery__item-name">Гора Эльбрус</h2>
+              <button type="button" class="gallery__like-button"></button>
+            </div>
           </li>
           <li class="gallery__item">
-              <img
-                class="gallery__item-photo"
-                src="./images/alec-krum-CVDq2sft5KY-unsplash.jpg"
-                alt="Гора Эльбрус в солнечный день"
-              />
-              <div class="gallery__item-description">
-                <h2 class="gallery__item-name">Гора Эльбрус</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
+            <button type="button" class="gallery__remove-button"></button>
+            <img
+              class="gallery__item-photo"
+              src="./images/eberhard-grossgasteiger-mS1vg1AQgYo-unsplash.jpg"
+              alt="Домбай в тумане"
+            />
+            <div class="gallery__item-description">
+              <h2 class="gallery__item-name">Домбай</h2>
+              <button type="button" class="gallery__like-button"></button>
+            </div>
           </li>
           <li class="gallery__item">
-              <img
-                class="gallery__item-photo"
-                src="./images/eberhard-grossgasteiger-mS1vg1AQgYo-unsplash.jpg"
-                alt="Домбай в тумане"
-              />
-              <div class="gallery__item-description">
-                <h2 class="gallery__item-name">Домбай</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
+            <button type="button" class="gallery__remove-button"></button>
+
+            <img
+              class="gallery__item-photo"
+              src="./images/julien-riedel-IalbtwfA02k-unsplash.jpg"
+              alt="Гора Эльбрус и турист-покоритель вершин"
+            />
+            <div class="gallery__item-description">
+              <h2 class="gallery__item-name">Гора Эльбрус</h2>
+              <button type="button" class="gallery__like-button"></button>
+            </div>
           </li>
           <li class="gallery__item">
-              <img
-                class="gallery__item-photo"
-                src="./images/julien-riedel-IalbtwfA02k-unsplash.jpg"
-                alt="Гора Эльбрус и турист-покоритель вершин"
-              />
-              <div class="gallery__item-description">
-                <h2 class="gallery__item-name">Гора Эльбрус</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
+            <button type="button" class="gallery__remove-button"></button>
+            <img
+              class="gallery__item-photo"
+              src="./images/jaromir-kalina-rwCo2-mXSvs-unsplash.jpg"
+              alt="Домбай и зеленые поля"
+            />
+            <div class="gallery__item-description">
+              <h2 class="gallery__item-name">Домбай</h2>
+              <button type="button" class="gallery__like-button"></button>
+            </div>
           </li>
           <li class="gallery__item">
-              <img
-                class="gallery__item-photo"
-                src="./images/jaromir-kalina-rwCo2-mXSvs-unsplash.jpg"
-                alt="Домбай и зеленые поля"
-              />
-              <div class="gallery__item-description">
-                <h2 class="gallery__item-name">Домбай</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
-          </li>
-          <li class="gallery__item">
-              <img
-                class="gallery__item-photo"
-                src="./images/mary-brennan-s1t-ovl5HSA-unsplash.jpg"
-                alt="Карачаево-Черкесия, автодорога в гористой местности"
-              />
-              <div class="gallery__item-description">
-                <h2 class="gallery__item-name">Карачаево-Черкесия</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
+            <button type="button" class="gallery__remove-button"></button>
+            <img
+              class="gallery__item-photo"
+              src="./images/mary-brennan-s1t-ovl5HSA-unsplash.jpg"
+              alt="Карачаево-Черкесия, автодорога в гористой местности"
+            />
+            <div class="gallery__item-description">
+              <h2 class="gallery__item-name">Карачаево-Черкесия</h2>
+              <button type="button" class="gallery__like-button"></button>
+            </div>
           </li>
         </ul>
       </section>
 
-      <div class="popup">
+      <div class="popup popup_edit_user">
+
+        <!-- edit profile -->
         <div class="popup__container">
           <button type="button" class="popup__close-button"></button>
           <div class="popup__form">
@@ -124,12 +134,59 @@
                 Сохранить
               </button>
             </form>
-        </div>
+          </div>
         </div>
       </div>
+
+      <!-- create photocard -->
+      <div class="popup popup_create_card">
+        <div class="popup__container">
+          <button type="button" class="popup__close-button"></button>
+          <div class="popup__form">
+            <h3 class="popup__form-header">Новое место</h3>
+            <form name="photocard" class="popup__form-photocard">
+              <input
+                class="popup__input popup__input_form_photoname"
+                type="text"
+                name="photoname"
+                placeholder="Название"
+                minlength="1"
+                maxlength="30"
+              />
+              <input
+                class="popup__input popup__input_form_photolink"
+                type="url"
+                name="photolink"
+                placeholder="Ссылка на картинку"
+              />
+              <button class="popup__save-button" type="submit" name="save">
+                Создать
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
     </main>
 
     <footer class="footer">© 2022 Mesto Russia</footer>
+
+    <!-- phoptocard template -->
+    <template id="photocard">
+      <li class="gallery__item">
+        <button type="button" class="gallery__remove-button"></button>
+        <img class="gallery__item-photo" src="#" alt="Фотография" />
+        <div class="gallery__item-description">
+          <h2 class="gallery__item-name"></h2>
+          <button type="button" class="gallery__like-button"></button>
+        </div>
+      </li>
+    </template>
 
     <script src="./scripts/index.js"></script>
   </body>

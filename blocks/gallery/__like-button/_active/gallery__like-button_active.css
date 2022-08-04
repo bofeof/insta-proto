@@ -1,0 +1,7 @@
+.gallery__like-button_active {
+}
+
+.gallery__like-button_active:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
