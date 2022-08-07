@@ -86,8 +86,9 @@ function submitEditedUserInfo(evt) {
 // photocard func
 function addPhotoCard(){
   showPopUp(popUpAddCard);
-  document.querySelector('.popup__input_form_photoname').reset;
-  document.querySelector('.popup__input_form_photolink').reset;
+  console.log('reset data')
+  document.querySelector('.popup__input_form_photoname').value = '';
+  document.querySelector('.popup__input_form_photolink').value = '';
 }
 
 function removePhotoCard (item) {
@@ -160,9 +161,3 @@ initialCards.forEach(function(cardData){
   const cardItem = generatePhotoCard(cardData);
   addItemToContainer(cardItem , galleryContainer);
 });
-
-
-
-
-
-
