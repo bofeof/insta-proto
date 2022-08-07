@@ -86,7 +86,6 @@ function submitEditedUserInfo(evt) {
 // photocard func
 function addPhotoCard(){
   showPopUp(popUpAddCard);
-  console.log('reset data')
   document.querySelector('.popup__input_form_photoname').value = '';
   document.querySelector('.popup__input_form_photolink').value = '';
 }
