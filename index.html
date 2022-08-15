@@ -28,35 +28,44 @@
       </section>
 
       <section aria-label="Галлерея мест">
-        <ul class="gallery">
-
-        </ul>
+        <ul class="gallery"></ul>
       </section>
 
       <div class="popup popup_edit_user">
-        <!-- edit profile -->
         <div class="popup__container">
           <button type="button" class="popup__close-button"></button>
           <div class="popup__form">
             <h3 class="popup__form-header">Редактировать профиль</h3>
-            <form name="userinfo" class="popup__form-userinfo">
+            <form name="userinfo" class="popup__form-userinfo" novalidate>
               <input
                 class="popup__input popup__input_form_name"
                 type="text"
                 name="username"
+                id="username-input"
                 placeholder="Имя"
-                minlength="1"
-                maxlength="30"
+                minlength="2"
+                maxlength="40"
+                required
               />
+              <span class="popup__input-error username-input-error"></span>
+
               <input
                 class="popup__input popup__input_form_job"
                 type="text"
                 name="jobinfo"
+                id="jobinfo-input"
                 placeholder="О себе"
-                minlength="0"
-                maxlength="50"
+                minlength="2"
+                maxlength="200"
+                required
               />
-              <button class="popup__save-button" type="submit" name="save">
+              <span class="popup__input-error jobinfo-input-error"></span>
+
+              <button
+                class="popup__button popup__save-button"
+                type="submit"
+                name="save"
+              >
                 Сохранить
               </button>
             </form>
@@ -70,22 +79,34 @@
           <button type="button" class="popup__close-button"></button>
           <div class="popup__form">
             <h3 class="popup__form-header">Новое место</h3>
-            <form name="photocard" class="popup__form-photocard">
+            <form name="photocard" class="popup__form-photocard" novalidate>
               <input
                 class="popup__input popup__input_form_photoname"
                 type="text"
                 name="photoname"
+                id="photoname-input"
                 placeholder="Название"
-                minlength="1"
+                minlength="2"
                 maxlength="30"
+                required
               />
+              <span class="popup__input-error photoname-input-error"></span>
+
               <input
                 class="popup__input popup__input_form_photolink"
                 type="url"
                 name="photolink"
                 placeholder="Ссылка на картинку"
+                id="url-input"
+                required
               />
-              <button class="popup__save-button" type="submit" name="save">
+              <span class="popup__input-error url-input-error"></span>
+
+              <button
+                class="popup__button popup__save-button"
+                type="submit"
+                name="save"
+              >
                 Создать
               </button>
             </form>
@@ -122,5 +143,7 @@
     </template>
 
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
+
   </body>
 </html>

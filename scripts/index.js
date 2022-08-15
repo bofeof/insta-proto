@@ -1,3 +1,31 @@
+const popUp = document.querySelector('.popup');
+
+function definePopUpOpened(){
+  const popUpOpened = document.querySelector('.popup_opened');
+  return popUpOpened
+}
+
+// close popup - esc
+document.addEventListener('keydown', function(evt){
+  popUpOpened = definePopUpOpened();
+  if ((evt.key==='Escape') && !(popUpOpened === null)){
+    closePopUp(popUpOpened);
+    }
+})
+
+// close popup - overlay-click
+document.addEventListener('click', function(evt){
+  popUpOpened = definePopUpOpened();
+  if (
+    evt.target.classList.contains('popup') ||
+    evt.target.classList.contains('popup__container') ||
+    evt.target.classList.contains('popup__img-container')
+    ) {
+      closePopUp(popUpOpened);
+  }
+})
+
+// gallery
 const galleryTemplate = document.querySelector('#photocard').content;
 const galleryContainer = document.querySelector('.gallery');
 
@@ -36,7 +64,7 @@ formUserInfo.addEventListener('submit', submitEditedUserInfo);
 buttonEditUser.addEventListener('click', editUserInfo);
 popUpCloseButtonEditUser.addEventListener('click', function(){closePopUp(popUpEditInfo)});
 
-// task1
+// create some cards
 const initialCards = [
   {
     name: 'Архыз',
@@ -90,8 +118,7 @@ function submitEditedUserInfo(evt) {
 // photocard func
 function addPhotoCard(){
   showPopUp(popUpAddCard);
-  popUpInputPhotoName.value = '';
-  popUpInputPhotoLink.value = '';
+  photoCard.reset()
 }
 
 function removePhotoCard (item) {
