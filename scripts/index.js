@@ -35,12 +35,10 @@ const popUpCloseButtonEditUser = popUpEditInfo.querySelector('.popup__close-butt
 formUserInfo.addEventListener('submit', submitEditedUserInfo);
 
 buttonEditUser.addEventListener('click', function(){
-  document.addEventListener('keydown', closePopUpByEsc);
   editUserInfo();
 });
 
 buttonAddCard.addEventListener('click', function(){
-  document.addEventListener('keydown', closePopUpByEsc);
   addPhotoCard()});
 
 popUpCloseButtonEditUser.addEventListener('click', function(){closePopUp(popUpEditInfo)});
@@ -74,16 +72,17 @@ function closePopUpByEsc(evt){
   if ((evt.key==='Escape') && !(popUpOpened === null)){
     closePopUp(popUpOpened);
     };
-  document.removeEventListener('keydown', closePopUpByEsc);
 }
 
 // popup
 function showPopUp (elem) {
   elem.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopUpByEsc);
 }
 
 function closePopUp(elem) {
   elem.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopUpByEsc);
 }
 
 // user func
@@ -151,7 +150,6 @@ function generatePhotoCard(card){
 
 function handlePreviewPicture() {
   showPopUp(popUpImgItem);
-  document.addEventListener('keydown', closePopUpByEsc);
 }
 
 // set listener to any elem\selector
