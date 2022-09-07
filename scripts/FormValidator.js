@@ -1,3 +1,7 @@
+import {buttonAddCard, buttonEditUser} from './index.js'
+
+
+
 const validationElements = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -86,3 +90,4 @@ buttonEditUser.addEventListener('click', function(){
   enableValidation(validationElements)});
 
 enableValidation(validationElements);
+
