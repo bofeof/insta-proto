@@ -1,34 +1,30 @@
-import {initialCards} from './constants.js';
+import {initialCards, validationElements} from './constants.js';
 import {Card} from './Card.js';
-export {showPopUp, closePopUp, buttonAddCard, buttonEditUser};
-
+import {FormValidator} from './FormValidator.js';
 
 // gallery
 const galleryContainer = document.querySelector('.gallery');
 
-// cardFormPopup
+// formCardPopup
 const popUpAddCard = document.querySelector('.popup_create_card');
 const buttonAddCard = document.querySelector('.user__add-button');
-const cardFormPopup = document.querySelector('.popup__form-photocard');
+const formCardPopup = document.querySelector('.popup__form-photocard');
 const popUpCloseButtonAddCard = popUpAddCard.querySelector('.popup__close-button');
-const popUpInputPhotoName = document.querySelector('.popup__input_form_photoname');
-const popUpInputPhotoLink = document.querySelector('.popup__input_form_photolink');
 const photoNameInput = document.querySelector('.popup__input_form_photoname');
 const photoLinkInput = document.querySelector('.popup__input_form_photolink');
 
 // user
 const popUpEditInfo = document.querySelector('.popup_edit_user');
 const buttonEditUser = document.querySelector('.user__edit-button');
-const formUserInfo = document.querySelector('.popup__form-userinfo');
+const formUserInfoPopup = document.querySelector('.popup__form-userinfo');
 const nameInput = document.querySelector('.popup__input_form_name');
 const jobInput = document.querySelector('.popup__input_form_job');
 const userName = document.querySelector('.user__name');
 const userJob = document.querySelector('.user__job');
 const popUpCloseButtonEditUser = popUpEditInfo.querySelector('.popup__close-button');
 
-
 // listeners
-formUserInfo.addEventListener('submit', submitEditedUserInfo);
+formUserInfoPopup.addEventListener('submit', submitEditedUserInfo);
 
 buttonEditUser.addEventListener('click', function(){
   editUserInfo();
@@ -39,12 +35,11 @@ buttonAddCard.addEventListener('click', function(){
 
 popUpCloseButtonEditUser.addEventListener('click', function(){closePopUp(popUpEditInfo)});
 
-
-cardFormPopup.addEventListener('submit', submitPhotoCard);
+formCardPopup.addEventListener('submit', submitPhotoCard);
 
 popUpCloseButtonAddCard.addEventListener('click', function(){closePopUp(popUpAddCard)});
 
-// close popup - overlay-click
+//overlay-click
 document.addEventListener('click', function(evt){
   const popUpOpened = definePopUpOpened();
   if (
@@ -69,18 +64,16 @@ function closePopUpByEsc(evt){
     };
 }
 
-// popup
-function showPopUp (elem) {
+export function showPopUp (elem) {
   elem.classList.add('popup_opened');
   document.addEventListener('keydown', closePopUpByEsc);
 }
 
-function closePopUp(elem) {
+export function closePopUp(elem) {
   elem.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopUpByEsc);
 }
 
-// user func
 function editUserInfo() {
   showPopUp(popUpEditInfo);
   nameInput.value = userName.textContent;
@@ -94,13 +87,10 @@ function submitEditedUserInfo(evt) {
   closePopUp(popUpEditInfo);
 }
 
-
-// photocard func
 function addPhotoCard(){
   showPopUp(popUpAddCard);
-  cardFormPopup.reset()
+  formCardPopup.reset()
 }
-
 
 function submitPhotoCard(evt){
   evt.preventDefault();
@@ -109,7 +99,6 @@ function submitPhotoCard(evt){
                     'link': photoLinkInput.value};
 
   const card = new Card(cardData, '#photocard');
-
   const cardItem = card.generatePhotoCard();
 
   addItemToContainer(cardItem , galleryContainer);
@@ -117,17 +106,25 @@ function submitPhotoCard(evt){
   closePopUp(popUpAddCard);
 }
 
-
-// add photocard to html
 function addItemToContainer(item, container) {
   container.prepend(item);
 }
 
+// create card from const arr
 initialCards.forEach(function(cardData){
-
   const card = new Card(cardData, '#photocard');
-
   const cardItem = card.generatePhotoCard();
-
   addItemToContainer(cardItem , galleryContainer);
 });
+
+// validation
+buttonAddCard.addEventListener('click', function(){
+  const formUserValidation = new FormValidator(validationElements, formCardPopup);
+  formUserValidation.enableValidation()});
+
+buttonEditUser.addEventListener('click', function(){
+  const formCardValidation = new FormValidator(validationElements, formUserInfoPopup);
+  formCardValidation.enableValidation()});
+
+formUserValidation.enableValidation();
+formCardValidation.enableValidation();

@@ -1,4 +1,3 @@
-// create some cards
 const initialCards = [
   {
     name: 'Архыз',
@@ -26,4 +25,13 @@ const initialCards = [
   }
 ];
 
-export {initialCards}
+const validationElements = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+export {initialCards, validationElements};
