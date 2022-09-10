@@ -66,9 +66,6 @@ function closePopUpByEsc(evt, popUpOpened){
 
 export function showPopUp (elem) {
 
-  formUserValidation.resetValidation();
-  formCardValidation.resetValidation();
-
   elem.classList.add('popup_opened');
   const popUpOpened = document.querySelector('.popup_opened');
 
@@ -133,8 +130,8 @@ initialCards.forEach(function(cardData){
 });
 
 // validation
-const formUserValidation = new FormValidator(validationElements, formCardPopup);
-const formCardValidation = new FormValidator(validationElements, formUserInfoPopup);
+const formUserValidation = new FormValidator(validationElements, formUserInfoPopup);
+const formCardValidation = new FormValidator(validationElements, formCardPopup );
 
 formUserValidation.enableValidation();
 formCardValidation.enableValidation();
