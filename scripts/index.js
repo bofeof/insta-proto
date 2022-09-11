@@ -54,7 +54,7 @@ function closePopUpByClick(evt){
     evt.target.classList.contains('popup__container') ||
     evt.target.classList.contains('popup__img-container')
     ) {
-      const popUpOpened = document.querySelector('.popup_opened');
+      const popUpOpened = evt.currentTarget;
       closePopUp(popUpOpened);
     }
 }
@@ -69,14 +69,13 @@ function closePopUpByEsc(evt){
 export function showPopUp (elem) {
 
   elem.classList.add('popup_opened');
-
-  document.addEventListener('click', closePopUpByClick);
+  elem.addEventListener('click', closePopUpByClick);
   document.addEventListener('keydown', closePopUpByEsc);
 }
 
 function closePopUp(elem) {
   elem.classList.remove('popup_opened');
-  document.removeEventListener('click', closePopUpByClick);
+  elem.removeEventListener('click', closePopUpByClick);
   document.removeEventListener('keydown', closePopUpByEsc);
 }
 
