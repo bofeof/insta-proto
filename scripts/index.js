@@ -48,18 +48,20 @@ formCardPopup.addEventListener('submit', submitPhotoCard);
 popUpCloseButtonAddCard.addEventListener('click', function(){closePopUp(popUpAddCard)});
 
 //overlay-click
-function closePopUpByClick(evt, popUpOpened){
+function closePopUpByClick(evt){
   if (
     evt.target.classList.contains('popup') ||
     evt.target.classList.contains('popup__container') ||
     evt.target.classList.contains('popup__img-container')
     ) {
+      const popUpOpened = document.querySelector('.popup_opened');
       closePopUp(popUpOpened);
     }
 }
 
-function closePopUpByEsc(evt, popUpOpened){
+function closePopUpByEsc(evt){
   if (evt.key ==='Escape') {
+    const popUpOpened = document.querySelector('.popup_opened');
     closePopUp(popUpOpened)
   }
 }
@@ -67,14 +69,14 @@ function closePopUpByEsc(evt, popUpOpened){
 export function showPopUp (elem) {
 
   elem.classList.add('popup_opened');
-  const popUpOpened = document.querySelector('.popup_opened');
 
-  popUpOpened.addEventListener('click', (evt) => {closePopUpByClick(evt, popUpOpened)});
-  document.addEventListener('keydown', (evt) => {closePopUpByEsc(evt, popUpOpened)})
+  document.addEventListener('click', closePopUpByClick);
+  document.addEventListener('keydown', closePopUpByEsc);
 }
 
 function closePopUp(elem) {
   elem.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopUpByClick);
   document.removeEventListener('keydown', closePopUpByEsc);
 }
 
