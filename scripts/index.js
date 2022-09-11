@@ -76,7 +76,7 @@ export function showPopUp (elem) {
 
 function closePopUp(elem) {
   elem.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopUpByClick);
+  document.removeEventListener('click', closePopUpByClick);
   document.removeEventListener('keydown', closePopUpByEsc);
 }
 
