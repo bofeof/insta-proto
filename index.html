@@ -36,7 +36,7 @@
           <button type="button" class="popup__close-button"></button>
           <div class="popup__form">
             <h3 class="popup__form-header">Редактировать профиль</h3>
-            <form name="userinfo" class="popup__form-userinfo" novalidate>
+            <form name="userinfo" class="popup__form-inputs popup__form-userinfo" novalidate>
               <input
                 class="popup__input popup__input_form_name"
                 type="text"
@@ -62,7 +62,7 @@
               <span class="popup__input-error jobinfo-input-error"></span>
 
               <button
-                class="popup__button popup__save-button"
+                class="popup__button popup__button-submit popup__save-button"
                 type="submit"
                 name="save"
               >
@@ -79,7 +79,7 @@
           <button type="button" class="popup__close-button"></button>
           <div class="popup__form">
             <h3 class="popup__form-header">Новое место</h3>
-            <form name="photocard" class="popup__form-photocard" novalidate>
+            <form name="photocard" class="popup__form-inputs popup__form-photocard" novalidate>
               <input
                 class="popup__input popup__input_form_photoname"
                 type="text"
@@ -103,7 +103,7 @@
               <span class="popup__input-error url-input-error"></span>
 
               <button
-                class="popup__button popup__save-button"
+                class="popup__button popup__button-submit popup__save-button"
                 type="submit"
                 name="save"
               >
@@ -142,7 +142,7 @@
       </li>
     </template>
 
-    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/pages/index.js"></script>
 
   </body>
 </html>
