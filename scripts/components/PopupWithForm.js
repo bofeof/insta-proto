@@ -7,13 +7,13 @@ export class PopupWithForm extends Popup{
 
     this._popUpElement = document.querySelector(selector);
 
-    // колбэк сабмита формы
+    // submit form callback
     this._handleFormSubmit = handleFormSubmit;
 };
 
 _getInputValues(){
 
-  this._inputList = this._popUpElement.querySelectorAll('.form__input');
+  this._inputList = this._popUpElement.querySelector('.popup__form').querySelectorAll('.popup__input');
   this._formValues = {};
 
   this._inputList.forEach(input => {
@@ -24,27 +24,35 @@ _getInputValues(){
 }
 
 
-// set user data to input
+// *custom, set user data to input (when pop up is opened)
 setInputValues(data){
-
   this._popUpElement.querySelector('.popup__input_form_name').value = data.username;
   this._popUpElement.querySelector('.popup__input_form_job').value = data.userjob;
-
 }
 
 
 setEventListeners(){
   super.setEventListeners();
 
-  //submit
-  // this._submitButton = this._popUpElement.querySelector('popup__button-submit');
-  this._popUpElement.querySelector('popup__button-submit').setEventListeners('submit', this._handleFormSubmit(this._getInputValues()))
+  this._FormSubmitFunc = (evt) => {
+    evt.preventDefault();
+    this._handleFormSubmit(this._getInputValues());
+  }
+
+  this._popUpElement.querySelector('.popup__submit-button').addEventListener('click', this._FormSubmitFunc)
 }
+
+removeEventListeners(){
+  this._popUpElement.querySelector('.popup__submit-button').removeEventListener('click', this._FormSubmitFunc)
+}
+
 
 close(){
   super.close();
 
   this._popUpElement.querySelector('.popup__form-inputs').reset();
+
+  this.removeEventListeners();
 }
 
 }

@@ -1,30 +1,34 @@
 export class Popup{
 
-  constructor({selector}){
+  constructor(selector){
     this._popUpElement = document.querySelector(selector);
   };
 
+
   open(){
+
       this._popUpElement.classList.add('popup_opened');
-      this._popUpElement.addEventListener('click', (evt) => {this._handleClickClose(evt)});
-      document.addEventListener('keydown', (evt) => {this._handleEscClose(evt)});
+
+      this._clickOverlay = this._handleClickClose.bind(this);
+      this._popUpElement.addEventListener('click', this._clickOverlay);
+
+      this._escClose = this._handleEscClose.bind(this);
+      document.addEventListener('keydown', this._escClose);
   };
+
 
   close(){
       this._popUpElement.classList.remove('popup_opened');
-      this._popUpElement.removeEventListener('click', (evt) => {this._handleClickClose(evt)});
-      document.removeEventListener('keydown', (evt) => {this._handleEscClose(evt)});
+      this._popUpElement.removeEventListener('click', this._clickOverlay);
+      document.removeEventListener('keydown', this._escClose );
   };
 
 
   // esc click
   _handleEscClose(evt){
-
       if (evt.key ==='Escape') {
-        // this._popUpOpened = document.querySelector('.popup_opened');
         this.close();
       }
-
   };
 
   // overlay click
@@ -41,9 +45,6 @@ export class Popup{
 
   setEventListeners(){
     this._popUpElement.querySelector('.popup__close-button').addEventListener('click', this.close.bind(this));
-
-    // this._PopUpCloseButton = this._popUpElement.querySelector('.popup__close-button');
-    // this._PopUpCloseButton.addEventListener('click', this._PopUpCloseButton.close.bind(this._PopUpCloseButton));
   }
 
 }

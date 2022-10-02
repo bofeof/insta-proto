@@ -1,13 +1,15 @@
 export class Card {
 
-  constructor(data, templateSelector, handleCardClick) {
+  constructor({data, templateSelector, handleCardClick}) {
 
     this._templateSelector = templateSelector;
 
-    this._link = data.link;
-    this._name = data.name;
 
-    //  открывать попап с картинкой при клике на карточку.
+    this._data = data;
+    this._link = data.photolink;
+    this._name = data.photoname;
+
+    //  open image popup by click
     this._handleCardClick = handleCardClick;
   }
 
@@ -20,20 +22,13 @@ export class Card {
 
     this._galleryItem = this._getTemplate();
 
-    // this._galleryItemName =  this._galleryItem.querySelector('.gallery__item-name');
-    // this._galleryItemPhoto = this._galleryItem.querySelector('.gallery__item-photo');
+    this._galleryItemName =  this._galleryItem.querySelector('.gallery__item-name');
+    this._galleryItemPhoto = this._galleryItem.querySelector('.gallery__item-photo');
 
-    // this._galleryItemName.textContent = this._name;
-    // this._galleryItemPhoto.src = this._link;
-    // this._galleryItemPhoto.alt = this._name;
+    this._galleryItemName.textContent = this._name;
+    this._galleryItemPhoto.src = this._link;
+    this._galleryItemPhoto.alt = this._name;
 
-    // // zoom
-    // this._popUpImg = document.querySelector('.popup__img-container');
-    // this._popUpImgItem = this._popUpImg.closest('.popup_zoom_img');
-    // this._popUpImgCard = this._popUpImgItem.querySelector('.popup__img-card');
-    // this._popUpImgCaption = this._popUpImgItem.querySelector('.popup__img-caption');
-
-    // button
     this._likeButton = this._galleryItem.querySelector('.gallery__like-button');
     this._removeButton = this._galleryItem.querySelector('.gallery__remove-button');
 
@@ -52,17 +47,8 @@ export class Card {
       'click', () => {this._removePhotoCard()}
     );
 
-    this._galleryItemPhoto.addEventListener(
-      'click', () => {
-
-        // установлено в другом классе popupwithimage
-        // this._zoomPhotoCard();
-
-
-        // this._handlePreviewPicture(); =>
-        this._handleCardClick()
-      }
-    );
+    // zoom
+    this._galleryItemPhoto.addEventListener('click', () => {this._handleCardClick(this._data)});
 
   }
 
@@ -75,16 +61,5 @@ export class Card {
     this._galleryItem.remove();
     this._galleryItem = null;
   }
-
-  // _zoomPhotoCard() {
-  //   // set data to popup img
-  //   this._popUpImgCard.src = this._link;
-  //   this._popUpImgCaption.textContent = this._name;
-  //   this._popUpImgCard.alt = this._name;
-  // }
-
-  // _handlePreviewPicture() {
-  //   showPopUp(this._popUpImgItem);
-  // }
 
 }

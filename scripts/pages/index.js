@@ -1,7 +1,6 @@
-import {initialCards, validationElements} from '../utils/constants.js';
+import {initialCards, validationElements, buttonEditUser, buttonAddCard, formUserInfoPopup, formCardPopup} from '../utils/constants.js';
 
 import {Card} from '../components/Card.js';
-import {Popup} from '../components/Popup.js';
 import {PopupWithImage} from '../components/PopupWithImage.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '../components/UserInfo.js';
@@ -11,165 +10,112 @@ import {Section} from '../components/Section.js';
 import {FormValidator} from '../components/FormValidator.js';
 
 
-// gallery
-const galleryContainer = document.querySelector('.gallery');
-
-// formCardPopup
-// const popUpAddCard = document.querySelector('.popup_create_card');
-const buttonAddCard = document.querySelector('.user__add-button');
-// const formCardPopup = document.querySelector('.popup__form-photocard');
-// const popUpCloseButtonAddCard = popUpAddCard.querySelector('.popup__close-button');
-// const photoNameInput = document.querySelector('.popup__input_form_photoname');
-// const photoLinkInput = document.querySelector('.popup__input_form_photolink');
-
-// user
-// const popUpEditInfo = document.querySelector('.popup_edit_user');
-// const buttonEditUser = document.querySelector('.user__edit-button');
-// const formUserInfoPopup = document.querySelector('.popup__form-userinfo');
-// const nameInput = document.querySelector('.popup__input_form_name');
-// const jobInput = document.querySelector('.popup__input_form_job');
-// const userName = document.querySelector('.user__name');
-// const userJob = document.querySelector('.user__job');
-// const popUpCloseButtonEditUser = popUpEditInfo.querySelector('.popup__close-button');
-
-// zoom
-// const popUpImg = document.querySelector('.popup__img-container');
-// const popUpImgItem = popUpImg.closest('.popup_zoom_img');
-// const popUpCloseButtonZoom = popUpImgItem.querySelector('.popup__close-button');
-
-// listeners
-// popUpCloseButtonZoom.addEventListener('click', function(){closePopUp(popUpImgItem)});
-
-// отправка данных пользователя
-// formUserInfoPopup.addEventListener('submit', submitEditedUserInfo);
-
-
 // EDIT USER
-
-const buttonEditUser = document.querySelector('.user__edit-button');
 buttonEditUser.addEventListener('click', function(){
 
-  // editUserInfo(); old
+  const popUpEditUser = new PopupWithForm({selector: '.popup_edit_user',
 
-  const popUpUser = new PopupWithForm({selector: '.popup_edit_user',
+  // user submit -> set new user data
+  handleFormSubmit: (formData) => {
+      user.setUserInfo(formData);
+      popUpEditUser.close();
+      formUserValidation.resetValidation();
+  }});
 
-    // действия при сабмите
-    handleFormSubmit: (formData) => {
-      // username, jobinfo = {formData};
+  // open edit-user popup and set listeners
+  popUpEditUser.open();
+  popUpEditUser.setEventListeners();
 
+  // set inputs-value from dom-data
+  const user = new UserInfo('.user__name', '.user__job');
+  const userData = user.getUserInfo();
+  popUpEditUser.setInputValues(userData);
 
-
-    }});
-
-
-    // установка значений как на сайте
-    const user = new UserInfo('.user__name', '.user__job');
-    const userData = user.getUserInfo();
-
-    popUpUser.setInputValues(userData)
-
-    popUpUser.open();
-    popUpUser.setEventListeners();
-
+  formUserValidation.resetValidation();
 
 });
 
+
+// ADD PHOTO
 buttonAddCard.addEventListener('click', function(){
-  addPhotoCard();
-});
 
-// popUpCloseButtonEditUser.addEventListener('click', function(){closePopUp(popUpEditInfo)});
+  const addPhotoCard = new PopupWithForm(
+    {selector: '.popup_create_card',
 
-// formCardPopup.addEventListener('submit', submitPhotoCard);
 
-// popUpCloseButtonAddCard.addEventListener('click', function(){closePopUp(popUpAddCard)});
+    // submit\add new photo
+    handleFormSubmit: (formData) => {
 
-//overlay-click
-// function closePopUpByClick(evt){
-//   if (
-//     evt.target.classList.contains('popup') ||
-//     evt.target.classList.contains('popup__container') ||
-//     evt.target.classList.contains('popup__img-container')
-//     ) {
-//       const popUpOpened = evt.currentTarget;
-//       closePopUp(popUpOpened);
-//     }
-// }
+      const card = new Card(
+        {data: formData,
+        templateSelector: '#photocard',
 
-// function closePopUpByEsc(evt){
-//   if (evt.key ==='Escape') {
-//     const popUpOpened = document.querySelector('.popup_opened');
-//     closePopUp(popUpOpened)
-//   }
-// }
+        // img popup
+        handleCardClick:(photoData) => {
+          const popUpImage = new PopupWithImage({data: photoData, selector:'.popup_zoom_img'});
+          popUpImage.Open();
+          popUpImage.setEventListeners();
+        }
+      })
 
-// export function showPopUp (elem) {
+      const cardAdd = new Section(
+        {items: [],
+          renderer: (item) => {}
+        },
+        '.gallery')
 
-//   elem.classList.add('popup_opened');
-//   elem.addEventListener('click', closePopUpByClick);
-//   document.addEventListener('keydown', closePopUpByEsc);
-// }
 
-// function closePopUp(elem) {
-//   elem.classList.remove('popup_opened');
-//   elem.removeEventListener('click', closePopUpByClick);
-//   document.removeEventListener('keydown', closePopUpByEsc);
-// }
+      // generate card
+      const photoCard = card.generatePhotoCard();
+      // add dom
+      cardAdd.addItem(photoCard);
+      // close popup add-card
+      addPhotoCard.close();
 
-// function editUserInfo() {
-//   showPopUp(popUpEditInfo);
-//   nameInput.value = userName.textContent;
-//   jobInput.value = userJob.textContent;
-//   formUserValidation.resetValidation();
-// }
+      formCardValidation.resetValidation();
 
-// function submitEditedUserInfo(evt) {
-//   evt.preventDefault();
-//   userName.textContent = nameInput.value;
-//   userJob.textContent = jobInput.value;
-//   closePopUp(popUpEditInfo);
-// }
+    }
+  }
+  );
 
-// function addPhotoCard(){
-//   showPopUp(popUpAddCard);
-//   formCardPopup.reset()
-//   formCardValidation.resetValidation();
-// }
+  addPhotoCard.open();
+  addPhotoCard.setEventListeners();
 
-// function createCard(cardData){
-//   const card = new Card(cardData, '#photocard');
-//   return card.generatePhotoCard();
-// }
+  formCardValidation.resetValidation();
 
-// // function addItemToContainer(item, container) {
-// //   container.prepend(item);
-// // }
+})
 
-// function submitPhotoCard(evt){
-//   evt.preventDefault();
+// add photocards from initialCards
+const addPhotoList = new Section(
+    {items: initialCards,
+      renderer: (item) => {
 
-//   const cardData = {'name': photoNameInput.value,
-//                     'link': photoLinkInput.value};
+        const card = new Card(
+          {data: item,
+          templateSelector: '#photocard',
 
-//   const cardItem = createCard(cardData);
+          // img popup
+          handleCardClick:(photoData) => {
+            const popUpImage = new PopupWithImage({data: photoData, selector:'.popup_zoom_img'});
+            popUpImage.Open();
+            popUpImage.setEventListeners();
+          }
+        });
 
-//   addItemToContainer(cardItem , galleryContainer);
+        // generate card
+        const photoCard = card.generatePhotoCard();
+        // add dom
+        addPhotoList.addItem(photoCard);
 
-//   closePopUp(popUpAddCard);
-// }
+      }
+    },
+  '.gallery')
 
-// // create card from const arr
-// initialCards.forEach(function(cardData){
-//   const cardItem = createCard(cardData);
-//   addItemToContainer(cardItem , galleryContainer);
-// });
+addPhotoList.renderItem()
 
-// // validation
-// const formUserValidation = new FormValidator(validationElements, formUserInfoPopup);
-// const formCardValidation = new FormValidator(validationElements, formCardPopup );
+// validation
+const formUserValidation = new FormValidator(validationElements, formUserInfoPopup);
+const formCardValidation = new FormValidator(validationElements, formCardPopup);
 
-// formUserValidation.enableValidation();
-// formCardValidation.enableValidation();
-
-// formUserValidation.resetValidation();
-// formCardValidation.resetValidation();
+formCardValidation.enableValidation();
+formUserValidation.enableValidation();
