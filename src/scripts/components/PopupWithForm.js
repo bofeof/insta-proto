@@ -34,16 +34,16 @@ setInputValues(data){
 setEventListeners(){
   super.setEventListeners();
 
-  this._FormSubmitFunc = (evt) => {
+  this._submitForm = (evt) => {
     evt.preventDefault();
     this._handleFormSubmit(this._getInputValues());
   }
 
-  this._popUpElement.querySelector('.popup__submit-button').addEventListener('click', this._FormSubmitFunc)
+  this._popUpElement.querySelector('.popup__submit-button').addEventListener('click', this._submitForm)
 }
 
 removeEventListeners(){
-  this._popUpElement.querySelector('.popup__submit-button').removeEventListener('click', this._FormSubmitFunc)
+  this._popUpElement.querySelector('.popup__submit-button').removeEventListener('click', this._submitForm)
 }
 
 

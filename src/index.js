@@ -60,7 +60,7 @@ buttonAddCard.addEventListener('click', function(){
         }
       })
 
-      const cardAdd = new Section(
+      const cardAddSection = new Section(
         {items: [],
           renderer: (item) => {}
         },
@@ -70,7 +70,7 @@ buttonAddCard.addEventListener('click', function(){
       // generate card
       const photoCard = card.generatePhotoCard();
       // add dom
-      cardAdd.addItem(photoCard);
+      cardAddSection.addItem(photoCard);
       // close popup add-card
       addPhotoCard.close();
 
@@ -88,7 +88,7 @@ buttonAddCard.addEventListener('click', function(){
 })
 
 // add photocards from initialCards
-const addPhotoList = new Section(
+const cardsAddSection = new Section(
     {items: initialCards,
       renderer: (item) => {
 
@@ -107,13 +107,13 @@ const addPhotoList = new Section(
         // generate card
         const photoCard = card.generatePhotoCard();
         // add dom
-        addPhotoList.addItem(photoCard);
+        cardsAddSection.addItem(photoCard);
 
       }
     },
   '.gallery')
 
-addPhotoList.renderItem()
+cardsAddSection.renderItem()
 
 // validation
 const formUserValidation = new FormValidator(validationElements, formUserInfoPopup);
