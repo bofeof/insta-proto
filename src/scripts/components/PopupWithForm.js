@@ -1,58 +1,55 @@
-import {Popup} from './Popup.js';
+import { Popup } from './Popup.js';
 
-export class PopupWithForm extends Popup{
-
-  constructor({selector, handleFormSubmit}){
+export class PopupWithForm extends Popup {
+  constructor({ selector, handleFormSubmit }) {
     super(selector);
 
-    this._popUpElement = document.querySelector(selector);
-
-    // submit form callback
+    /**  submit form callback */
     this._handleFormSubmit = handleFormSubmit;
-};
 
-_getInputValues(){
+    this._inputList = this._popUpElement
+      .querySelector('.popup__form-inputs')
+      .querySelectorAll('.popup__input');
 
-  this._inputList = this._popUpElement.querySelector('.popup__form').querySelectorAll('.popup__input');
-  this._formValues = {};
+    this._submitForm = (evt) => {
+      evt.preventDefault();
+      this._handleFormSubmit(this._getInputValues());
+    };
 
-  this._inputList.forEach(input => {
-    this._formValues[input.name] = input.value;
-  });
-
-  return this._formValues;
-}
-
-
-// *custom, set user data to input (when pop up is opened)
-setInputValues(data){
-  this._popUpElement.querySelector('.popup__input_form_name').value = data.username;
-  this._popUpElement.querySelector('.popup__input_form_job').value = data.userjob;
-}
-
-
-setEventListeners(){
-  super.setEventListeners();
-
-  this._submitForm = (evt) => {
-    evt.preventDefault();
-    this._handleFormSubmit(this._getInputValues());
+    this._submitButton = this._popUpElement.querySelector(
+      '.popup__submit-button'
+    );
   }
 
-  this._popUpElement.querySelector('.popup__submit-button').addEventListener('click', this._submitForm)
-}
+  _getInputValues() {
+    this._formValues = {};
 
-removeEventListeners(){
-  this._popUpElement.querySelector('.popup__submit-button').removeEventListener('click', this._submitForm)
-}
+    this._inputList.forEach((input) => {
+      this._formValues[input.name] = input.value;
+    });
 
+    return this._formValues;
+  }
 
-close(){
-  super.close();
+  /** custom, set user data to input (when pop up is opened) */
+  setInputValues(data) {
+    Object.entries(data).forEach(([input, val]) => {
+      this._popUpElement.querySelector(input).value = val;
+    });
+  }
 
-  this._popUpElement.querySelector('.popup__form-inputs').reset();
+  setEventListeners() {
+    super.setEventListeners();
+    this._submitButton.addEventListener('click', this._submitForm);
+  }
 
-  this.removeEventListeners();
-}
+  removeEventListeners() {
+    this._submitButton.removeEventListener('click', this._submitForm);
+  }
 
+  close() {
+    super.close();
+    this._popUpElement.querySelector('.popup__form-inputs').reset();
+    this.removeEventListeners();
+  }
 }

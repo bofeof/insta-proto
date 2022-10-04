@@ -1,31 +1,31 @@
 const initialCards = [
   {
-    photoname: 'Архыз',
-    photolink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    photoName: 'Архыз',
+    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
-    photoname: 'Челябинская область',
-    photolink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    photoName: 'Челябинская область',
+    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-    photoname: 'Иваново',
-    photolink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    photoName: 'Иваново',
+    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
-    photoname: 'Камчатка',
-    photolink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    photoName: 'Камчатка',
+    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
-    photoname: 'Холмогорский район',
-    photolink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    photoName: 'Холмогорский район',
+    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-    photoname: 'Байкал',
-    photolink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    photoName: 'Байкал',
+    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
 
-const validationElements = {
+const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
@@ -42,4 +42,4 @@ const formCardPopup = document.querySelector('.popup__form-photocard');
 
 
 
-export {initialCards, validationElements, buttonEditUser, buttonAddCard, formUserInfoPopup, formCardPopup};
+export {initialCards, validationConfig, buttonEditUser, buttonAddCard, formUserInfoPopup, formCardPopup};
