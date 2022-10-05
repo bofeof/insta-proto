@@ -46,6 +46,6 @@ export class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._popUpElement.querySelector('.popup__form-inputs').reset();
+    this._popUpForm.reset();
   }
 }
