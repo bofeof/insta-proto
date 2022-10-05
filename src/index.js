@@ -31,16 +31,12 @@ function initPopUp(selector, handleFormSubmit) {
 
 /** init card section for new photo: (photodata, render func, section selector) */
 function initCardSection(items, renderer, selector) {
-  return new Section({ items: items, renderer: renderer }, selector);
+  const cardSection = new Section({ items: items, renderer: renderer }, selector);
+  return cardSection
 }
 
 
 /** EDIT USER */
-const popUpUserInputSelectors = {
-  userNameSelector: '.popup__input_form_name',
-  jobInfoSelector: '.popup__input_form_job'
-};
-
 
 const popUpEditUser = initPopUp('.popup_edit_user', handlePopUpUserSubmit);
 popUpEditUser.setEventListeners();
@@ -75,12 +71,19 @@ buttonEditUser.addEventListener('click', openPopUpEditUser);
 /** ADD PHOTO */
 
 const popUpAddCard = initPopUp('.popup_create_card', handlePopUpCardSubmit);
+
 popUpAddCard.setEventListeners();
 
 const popUpImage = new PopupWithImage('.popup.popup_zoom_img');
 popUpImage.setEventListeners();
 
-const cardAddSection = initCardSection([], (item) => {}, '.gallery');
+const cardAddSection = initCardSection([], renderCard, '.gallery');
+
+function renderCard(item) {
+  const photoCard = createCard(item);
+  /** add dom */
+  cardAddSection.addItem(photoCard);
+}
 
 function createCard(formData) {
   const card = new Card({
@@ -117,15 +120,8 @@ buttonAddCard.addEventListener('click', addPhotoCard);
 
 
 /** add photocards from initialCards */
-
-function renderCard(item) {
-  const photoCard = createCard(item);
-  /** add dom */
-  cardsAddSection.addItem(photoCard);
-}
-
-const cardsAddSection = initCardSection(initialCards, renderCard, '.gallery');
-cardsAddSection.renderItems();
+cardAddSection._itemList = initialCards;
+cardAddSection.renderItems();
 
 
 /** validation */
