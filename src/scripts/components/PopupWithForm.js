@@ -7,9 +7,9 @@ export class PopupWithForm extends Popup {
     /**  submit form callback */
     this._handleFormSubmit = handleFormSubmit;
 
-    this._inputList = this._popUpElement
-      .querySelector('.popup__form-inputs')
-      .querySelectorAll('.popup__input');
+    this._popUpForm = this._popUpElement.querySelector('.popup__form-inputs');
+
+    this._inputList = this._popUpForm.querySelectorAll('.popup__input');
 
     this._submitForm = (evt) => {
       evt.preventDefault();
@@ -38,18 +38,14 @@ export class PopupWithForm extends Popup {
     });
   }
 
+
   setEventListeners() {
     super.setEventListeners();
     this._submitButton.addEventListener('click', this._submitForm);
   }
 
-  removeEventListeners() {
-    this._submitButton.removeEventListener('click', this._submitForm);
-  }
-
   close() {
     super.close();
     this._popUpElement.querySelector('.popup__form-inputs').reset();
-    this.removeEventListeners();
   }
 }

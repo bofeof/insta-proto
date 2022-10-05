@@ -21,41 +21,50 @@ import './styles/index.css';
 
 /** init popup form with inputs: for card and user */
 function initPopUp(selector, handleFormSubmit) {
-
   const popUp = new PopupWithForm({
     selector: selector,
-    handleFormSubmit: handleFormSubmit
+    handleFormSubmit: handleFormSubmit,
   });
 
-  return popUp
+  return popUp;
+}
+
+/** init card section for new photo: (photodata, render func, section selector) */
+function initCardSection(items, renderer, selector) {
+  return new Section({ items: items, renderer: renderer }, selector);
 }
 
 
 /** EDIT USER */
-const popUpEditUser = initPopUp('.popup_edit_user', uploadUserInfo)
+const popUpUserInputSelectors = {
+  userNameSelector: '.popup__input_form_name',
+  jobInfoSelector: '.popup__input_form_job'
+};
+
+
+const popUpEditUser = initPopUp('.popup_edit_user', handlePopUpUserSubmit);
+popUpEditUser.setEventListeners();
 
 const user = new UserInfo('.user__name', '.user__job');
 
 /** set new user data after submit */
-function uploadUserInfo(formData) {
+function handlePopUpUserSubmit(formData) {
   user.setUserInfo(formData);
   popUpEditUser.close();
   formUserValidation.resetValidation();
 }
 
 function openPopUpEditUser() {
+
   /**  open edit-user popup and set listeners */
   popUpEditUser.open();
-  popUpEditUser.setEventListeners();
 
   /** get inputs-value from dom-data */
   const userData = user.getUserInfo();
 
   /** set data {selector: data, selector: data} */
-  popUpEditUser.setInputValues({
-    '.popup__input_form_name': userData.userName,
-    '.popup__input_form_job': userData.jobInfo,
-  });
+  const userInputData = {'.popup__input_form_name': userData.userName, '.popup__input_form_job': userData.jobInfo}
+  popUpEditUser.setInputValues(userInputData);
 
   formUserValidation.resetValidation();
 }
@@ -65,13 +74,13 @@ buttonEditUser.addEventListener('click', openPopUpEditUser);
 
 /** ADD PHOTO */
 
-const popUpAddCard = initPopUp('.popup_create_card', uploadCardInfo);
+const popUpAddCard = initPopUp('.popup_create_card', handlePopUpCardSubmit);
+popUpAddCard.setEventListeners();
 
 const popUpImage = new PopupWithImage('.popup.popup_zoom_img');
-const cardAddSection = new Section(
-  { items: [], renderer: (item) => {} },
-  '.gallery'
-);
+popUpImage.setEventListeners();
+
+const cardAddSection = initCardSection([], (item) => {}, '.gallery');
 
 function createCard(formData) {
   const card = new Card({
@@ -81,16 +90,13 @@ function createCard(formData) {
     /** img popup func */
     handleCardClick: (cardData) => {
       popUpImage.open(cardData);
-      popUpImage.setEventListeners();
     },
   });
 
   return card.generatePhotoCard();
 }
 
-
-function uploadCardInfo(formData){
-
+function handlePopUpCardSubmit(formData) {
   /** get generated card */
   const photoCard = createCard(formData);
 
@@ -103,31 +109,24 @@ function uploadCardInfo(formData){
 }
 
 function addPhotoCard() {
-
   popUpAddCard.open();
-  popUpAddCard.setEventListeners();
   formCardValidation.resetValidation();
 }
 
 buttonAddCard.addEventListener('click', addPhotoCard);
 
 
-
 /** add photocards from initialCards */
 
-const cardsAddSection = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const photoCard = createCard(item);
-      /** add dom */
-      cardsAddSection.addItem(photoCard);
-    },
-  },
-  '.gallery'
-);
+function renderCard(item) {
+  const photoCard = createCard(item);
+  /** add dom */
+  cardsAddSection.addItem(photoCard);
+}
 
+const cardsAddSection = initCardSection(initialCards, renderCard, '.gallery');
 cardsAddSection.renderItems();
+
 
 /** validation */
 const formUserValidation = new FormValidator(

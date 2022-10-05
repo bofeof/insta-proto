@@ -34,12 +34,9 @@ const validationConfig = {
   errorClass: 'popup__error_visible'
 };
 
-
 const buttonEditUser = document.querySelector('.user__edit-button');
 const buttonAddCard = document.querySelector('.user__add-button');
 const formUserInfoPopup = document.querySelector('.popup__form-userinfo');
 const formCardPopup = document.querySelector('.popup__form-photocard');
-
-
 
 export {initialCards, validationConfig, buttonEditUser, buttonAddCard, formUserInfoPopup, formCardPopup};
