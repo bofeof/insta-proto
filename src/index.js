@@ -73,9 +73,9 @@ popUpImage.setEventListeners();
 
 const cardAddSection = initCardSection(initialCards, renderCard, '.gallery');
 
-/** init card section for new photo: ({list of cards, render func}, section selector) */
-function initCardSection(cardList, renderer, selector) {
-  const cardSection = new Section({items: cardList, renderer: renderer}, selector);
+/** init card section for new photo: ({list of items(cards), render func}, section selector) */
+function initCardSection(itemList, renderer, selector) {
+  const cardSection = new Section({items: itemList, renderer: renderer}, selector);
   return cardSection
 }
 
