@@ -29,12 +29,6 @@ function initPopUp(selector, handleFormSubmit) {
   return popUp;
 }
 
-/** init card section for new photo: (photodata, render func, section selector) */
-function initCardSection(items, renderer, selector) {
-  const cardSection = new Section({ items: items, renderer: renderer }, selector);
-  return cardSection
-}
-
 
 /** EDIT USER */
 
@@ -77,7 +71,13 @@ popUpAddCard.setEventListeners();
 const popUpImage = new PopupWithImage('.popup.popup_zoom_img');
 popUpImage.setEventListeners();
 
-const cardAddSection = initCardSection([], renderCard, '.gallery');
+const cardAddSection = initCardSection(initialCards, renderCard, '.gallery');
+
+/** init card section for new photo: ({list of cards, render func}, section selector) */
+function initCardSection(cardList, renderer, selector) {
+  const cardSection = new Section({items: cardList, renderer: renderer}, selector);
+  return cardSection
+}
 
 function renderCard(item) {
   const photoCard = createCard(item);
@@ -120,7 +120,6 @@ buttonAddCard.addEventListener('click', addPhotoCard);
 
 
 /** add photocards from initialCards */
-cardAddSection._itemList = initialCards;
 cardAddSection.renderItems();
 
 
