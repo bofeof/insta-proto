@@ -39,4 +39,12 @@ const buttonAddCard = document.querySelector('.user__add-button');
 const formUserInfoPopup = document.querySelector('.popup__form-userinfo');
 const formCardPopup = document.querySelector('.popup__form-photocard');
 
-export {initialCards, validationConfig, buttonEditUser, buttonAddCard, formUserInfoPopup, formCardPopup};
+const configAPI = {
+    mestoUrl: 'https://nomoreparties.co/v1/cohort-51',
+    headers: {
+      authorization: '0aa0db8f-1663-456c-947a-270a3646c3a8',
+      'Content-Type': 'application/json'
+    }
+  }
+
+export {initialCards, validationConfig, buttonEditUser, buttonAddCard, formUserInfoPopup, formCardPopup, configAPI};

@@ -20,9 +20,6 @@ import { FormValidator } from './scripts/components/FormValidator.js';
 import './styles/index.css';
 
 
-
-const api = new API(configAPI);
-
 /** init popup form with inputs: for card and user */
 function initPopUp(selector, handleFormSubmit) {
   const popUp = new PopupWithForm({

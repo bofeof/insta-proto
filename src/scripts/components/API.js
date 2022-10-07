@@ -1,110 +1,82 @@
-// const api = new Api({
-//   baseUrl: 'https://nomoreparties.co/v1/cohort-51',
-//   headers: {
-//     authorization: '228cae98-cff9-4022-bb25-2678b613ba24',
-//     'Content-Type': 'application/json'
-//   }
-// });
-
-
-// authorization
-
-
-
-
 class API {
 
-  constructor(configAPI){
-    this._configAPI = configAPI
+  constructor(configAPI) {
+    this._configAPI = configAPI;
   }
 
-  /** user */
+  /** USER */
 
-  getUserData(){
-
-    fetch ('', {
-      headers :  this._configAPI.authorization
+  /** {name, about, avatar, _id, cohort} */
+  getUserData() {
+    return fetch(`${this._configAPI.mestoUrl}/users/me`, {
+      method: 'GET',
+      headers: this._configAPI.headers,
     })
-
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
   }
 
-  editUserData(){}
+  // userInfo = {name: .., about: ...}
+  // response => get new user-info
+  editUserData(userData) {
+    return fetch(`${this._configAPI.mestoUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._configAPI.headers,
+      body: JSON.stringify({
+        name: userData.name,
+        about: userData.about,
+      }),
+    })
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+  }
 
   changeUserAvatar(){}
 
+  /** CARDS */
 
+  // get current cards data from server
+  getGalleryData() {
+    return fetch(`${this._configAPI.mestoUrl}/cards`, {
+      method: 'GET',
+      headers: this._configAPI.headers,
+    })
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+  }
 
-  /** card data */
-  getGalleryData(){}
+  // response -> get data of created card
+  addPhotoCard(cardData) {
+    return fetch(`${this._configAPI.mestoUrl}/cards`, {
+      method: 'POST',
+      headers: this._configAPI.headers,
+      body: JSON.stringify({
+        name: cardData.name,
+        link: cardData.link,
+      }),
+    })
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+  }
 
-  addPhotoCard(){}
+  removePhotoCard(cardId){
+    return fetch(`${this._configAPI.mestoUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._configAPI.header,
+    })
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+  }
 
-  removePhotoCard(){}
+  addPhotoLike(cardId) {
+    return fetch(`${this._configAPI.mestoUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._configAPI.headers,
+    })
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+  }
 
-  addPhotoLike(){}
-
-  removePhotoLike(){}
+  removePhotoLike(cardId){
+    return fetch(`${this._configAPI.mestoUrl}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._configAPI.headers,
+    })
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+  }
 
 }
-
-
-
-
-// запрос к серверу
-// При каждом запросе нужно передавать токен и идентификатор группы.
-// fetch('https://mesto.nomoreparties.co/v1/cohort-51/cards', {
-//   method: 'GET',
-//   headers: {
-//     authorization: '0aa0db8f-1663-456c-947a-270a3646c3a8'
-//   }
-// })
-
-//   .then(res => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
-
-
-
-
-  // // Загрузка информации о пользователе с сервера
-  // // Используйте свойства name, about и avatar в соответствующих
-  // // элементах шапки страницы. Свойство _id — это идентификатор пользователя, в данном случае вашего.
-  // fetch('https://nomoreparties.co/v1/cohort51/users/me', {
-  //   method: 'GET',
-  //   headers: {
-  //     authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6'
-  //   }
-  // })
-
-
-  // // Загрузка карточек с сервера - переписать создание карточек из массива, есть свойства карточки name link
-  // fetch('https://mesto.nomoreparties.co/v1/cohort51/cards', {
-  //   method: 'GET',
-  //   headers: {
-  //     authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6'
-  //   }
-  // })
-
-
-  // // Редактирование профиля
-  // fetch('https://mesto.nomoreparties.co/v1/cohort51/users/me', {
-  //   method: 'PATCH',
-  //   headers: {
-  //     authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({
-  //     name: 'Marie Skłodowska Curie', /** переменная ${userName} */
-  //     about: 'Physicist and Chemist' /** переменная  ${userJob}*/
-  //   })
-  // });
-
-
-// Отображение количества лайков карточки
-// У каждой карточки есть свойство likes — оно содержит массив пользователей, лайкнувших карточку:
-// likes.length
-// {
-//   "likes": [],
-//   ...другие данные карточки
-// }
