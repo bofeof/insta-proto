@@ -1,14 +1,14 @@
 .gallery__like-button {
   padding: 0;
-  margin: 5px 1px 5px 0;
-  width: 24px;
-  height: 24px;
+  margin: 0;
+  min-width: 22px;
+  height: 19px;
   border: none;
   background-color: #ffffff;
   background-image: url(../../../images/like/like-disabled.svg);
-  background-size: 22px 19px;
+  background-size: 100%;
   background-repeat: no-repeat;
-  background-position: center;
+  /* background-position: center; */
   align-self: center;
 
   transition: opacity 0.5s ease-in-out;

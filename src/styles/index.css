@@ -16,6 +16,11 @@
 /* USER */
 @import url(../blocks/user/user.css);
 @import url(../blocks/user/__avatar/user__avatar.css);
+
+@import url(../blocks/user/__avatar-container/user__avatar-container.css);
+@import url(../blocks/user/__avatar-overlay/user__avatar-overlay.css);
+@import url(../blocks/user/__avatar-icon/user__avatar-icon.css);
+
 @import url(../blocks/user/__name/user__name.css);
 @import url(../blocks/user/__job/user__job.css);
 @import url(../blocks/user/__header/user__header.css);
@@ -59,3 +64,10 @@
 @import url(../blocks/popup/_zoom_img/popup_zoom_img.css);
 
 @import url(../blocks/popup/__button/_inactive/popup__button_disabled.css);
+
+/* delete and confirm */
+@import url(../blocks/popup/__form/_confirm/popup__form_confirm.css);
+@import url(../blocks/popup/__form-header/_confirm/popup__form-header_confirm.css);
+
+@import url(../blocks/gallery/__like-container/gallery__like-container.css);
+@import url(../blocks/gallery/__like-counter/gallery__like-counter.css);
