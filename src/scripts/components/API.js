@@ -1,4 +1,4 @@
-class API {
+export class API {
 
   constructor(configAPI) {
     this._configAPI = configAPI;
@@ -12,12 +12,12 @@ class API {
       method: 'GET',
       headers: this._configAPI.headers,
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   }
 
   // userInfo = {name: .., about: ...}
   // response => get new user-info
-  editUserData(userData) {
+  setUserData(userData) {
     return fetch(`${this._configAPI.mestoUrl}/users/me`, {
       method: 'PATCH',
       headers: this._configAPI.headers,
@@ -26,10 +26,19 @@ class API {
         about: userData.about,
       }),
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
   }
 
-  changeUserAvatar(){}
+  changeUserAvatar(userData){
+    return fetch(`${this._configAPI.mestoUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._configAPI.headers,
+      body: JSON.stringify({
+        avatar: userData.avatar,
+      }),
+    })
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+  }
 
   /** CARDS */
 
@@ -39,7 +48,7 @@ class API {
       method: 'GET',
       headers: this._configAPI.headers,
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
   }
 
   // response -> get data of created card
@@ -52,31 +61,31 @@ class API {
         link: cardData.link,
       }),
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
   }
 
-  removePhotoCard(cardId){
-    return fetch(`${this._configAPI.mestoUrl}/cards/${cardId}`, {
+  removePhotoCard(photoCardId){
+    return fetch(`${this._configAPI.mestoUrl}/cards/${photoCardId}`, {
       method: 'DELETE',
       headers: this._configAPI.header,
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
   }
 
-  addPhotoLike(cardId) {
-    return fetch(`${this._configAPI.mestoUrl}/cards/${cardId}/likes`, {
+  addPhotoLike(photoCardId) {
+    return fetch(`${this._configAPI.mestoUrl}/cards/${photoCardId}/likes`, {
       method: 'PUT',
       headers: this._configAPI.headers,
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
   }
 
-  removePhotoLike(cardId){
-    return fetch(`${this._configAPI.mestoUrl}/cards/${cardId}/likes`, {
+  removePhotoLike(photoCardId){
+    return fetch(`${this._configAPI.mestoUrl}/cards/${photoCardId}/likes`, {
       method: 'DELETE',
       headers: this._configAPI.headers,
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка...${res.status}`));
+    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
   }
 
 }

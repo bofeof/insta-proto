@@ -38,6 +38,10 @@ export class PopupWithForm extends Popup {
     });
   }
 
+  changeButtonText(text){
+    this._submitButton.textContent = text;
+  }
+
 
   setEventListeners() {
     super.setEventListeners();

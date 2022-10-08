@@ -3,8 +3,10 @@ import {
   validationConfig,
   buttonEditUser,
   buttonAddCard,
+  editAvatar,
   formUserInfoPopup,
   formCardPopup,
+  formAvatarPopup,
   configAPI
 } from './scripts/utils/constants.js';
 
@@ -15,13 +17,14 @@ import { UserInfo } from './scripts/components/UserInfo.js';
 
 import { Section } from './scripts/components/Section.js';
 
+import { API } from './scripts/components/API.js';
+
 import { FormValidator } from './scripts/components/FormValidator.js';
 
 import './styles/index.css';
 
-
-
 const api = new API(configAPI);
+
 
 /** init popup form with inputs: for card and user */
 function initPopUp(selector, handleFormSubmit) {
@@ -35,18 +38,38 @@ function initPopUp(selector, handleFormSubmit) {
 
 
 /** EDIT USER */
+const user = new UserInfo('.user__name', '.user__job', '.user__avatar');
 
 const popUpEditUser = initPopUp('.popup_edit_user', handlePopUpUserSubmit);
 popUpEditUser.setEventListeners();
 
-const user = new UserInfo('.user__name', '.user__job');
+
+// get current user info from server
+api.getUserData()
+.then((data) => {
+  user.setUserInfo({name: data.name, about : data.about});
+  user.setUserAvatar({avatar: data.avatar});
+})
 
 /** set new user data after submit */
 function handlePopUpUserSubmit(formData) {
-  user.setUserInfo(formData);
-  popUpEditUser.close();
+
+  popUpEditUser.changeButtonText('Сохранение...');
+
+  // set data to server and update dom
+  api.setUserData(formData)
+  .then((data) => {
+    user.setUserInfo({name: data.name, about : data.about});
+    user.setUserAvatar({avatar: data.avatar});
+    popUpEditUser.close();
+  })
+  .catch((err) => console.log(`Ошибка: ${err}`))
+  .finally(() => popUpEditUser.changeButtonText('Сохранить'))
+
   formUserValidation.resetValidation();
+
 }
+
 
 function openPopUpEditUser() {
 
@@ -57,13 +80,57 @@ function openPopUpEditUser() {
   const userData = user.getUserInfo();
 
   /** set data {selector: data, selector: data} */
-  const userInputData = {'.popup__input_form_name': userData.userName, '.popup__input_form_job': userData.jobInfo}
+  const userInputData = {'.popup__input_form_name': userData.name, '.popup__input_form_job': userData.about}
   popUpEditUser.setInputValues(userInputData);
 
   formUserValidation.resetValidation();
 }
 
 buttonEditUser.addEventListener('click', openPopUpEditUser);
+
+
+/** edit avatar */
+const popUpEditAvatar = new initPopUp('.popup_change_avatar', handlePopUpAvatarSubmit)
+popUpEditAvatar.setEventListeners();
+
+function handlePopUpAvatarSubmit(formData){
+
+  popUpEditAvatar.changeButtonText('Сохранение...');
+
+  // set data to server and update dom
+  api.changeUserAvatar(formData)
+  .then((data) => {
+    api.changeUserAvatar({avatar: formData.avatar});
+    user.setUserAvatar({avatar: formData.avatar});
+    popUpEditAvatar.close();
+  })
+  .catch((err) => console.log(`Ошибка: ${err}`))
+  .finally(() => popUpEditAvatar.changeButtonText('Сохранить'))
+
+  formUserValidation.resetValidation();
+
+};
+
+function openPopUpEditAvatar(){
+
+  /**  open edit-user popup and set listeners */
+  popUpEditAvatar.open();
+
+/** get inputs-value from dom-data */
+  const userData = user.getUserInfo();
+
+  /** set data {selector: data, selector: data} */
+  popUpEditAvatar.setInputValues({'.popup__input_form_avatar' : userData.avatar})
+
+  formAvatarValidation.resetValidation();
+}
+
+editAvatar.addEventListener('click', openPopUpEditAvatar);
+
+
+
+
+
 
 
 /** ADD PHOTO */
@@ -128,11 +195,10 @@ cardAddSection.renderItems();
 
 
 /** validation */
-const formUserValidation = new FormValidator(
-  validationConfig,
-  formUserInfoPopup
-);
+const formUserValidation = new FormValidator(validationConfig, formUserInfoPopup);
 const formCardValidation = new FormValidator(validationConfig, formCardPopup);
+const formAvatarValidation = new FormValidator(validationConfig, formAvatarPopup);
 
 formCardValidation.enableValidation();
 formUserValidation.enableValidation();
+formAvatarValidation.enableValidation();

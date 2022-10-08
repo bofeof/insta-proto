@@ -36,8 +36,10 @@ const validationConfig = {
 
 const buttonEditUser = document.querySelector('.user__edit-button');
 const buttonAddCard = document.querySelector('.user__add-button');
+const editAvatar = document.querySelector('.user__avatar-editor');
 const formUserInfoPopup = document.querySelector('.popup__form-userinfo');
 const formCardPopup = document.querySelector('.popup__form-photocard');
+const formAvatarPopup = document.querySelector('.popup__form-avatar');
 
 const configAPI = {
     mestoUrl: 'https://nomoreparties.co/v1/cohort-51',
@@ -47,4 +49,4 @@ const configAPI = {
     }
   }
 
-export {initialCards, validationConfig, buttonEditUser, buttonAddCard, formUserInfoPopup, formCardPopup, configAPI};
+export {initialCards, validationConfig, buttonEditUser, buttonAddCard, editAvatar, formUserInfoPopup, formCardPopup, formAvatarPopup, configAPI};
