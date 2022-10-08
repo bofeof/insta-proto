@@ -13,6 +13,7 @@ import {
 import { Card } from './scripts/components/Card.js';
 import { PopupWithImage } from './scripts/components/PopupWithImage.js';
 import { PopupWithForm } from './scripts/components/PopupWithForm.js';
+import { PopupConfirm } from './scripts/components/PopupConfirm';
 import { UserInfo } from './scripts/components/UserInfo.js';
 
 import { Section } from './scripts/components/Section.js';
@@ -22,6 +23,7 @@ import { API } from './scripts/components/API.js';
 import { FormValidator } from './scripts/components/FormValidator.js';
 
 import './styles/index.css';
+import { ConcatenationScope } from 'webpack';
 
 const api = new API(configAPI);
 
@@ -37,12 +39,11 @@ function initPopUp(selector, handleFormSubmit) {
 }
 
 
+
 /** EDIT USER */
 const user = new UserInfo('.user__name', '.user__job', '.user__avatar');
-
 const popUpEditUser = initPopUp('.popup_edit_user', handlePopUpUserSubmit);
 popUpEditUser.setEventListeners();
-
 
 // get current user info from server
 api.getUserData()
@@ -56,7 +57,7 @@ function handlePopUpUserSubmit(formData) {
 
   popUpEditUser.changeButtonText('Сохранение...');
 
-  // set data to server and update dom
+  /** set data to server and update dom */
   api.setUserData(formData)
   .then((data) => {
     user.setUserInfo({name: data.name, about : data.about});
@@ -69,7 +70,6 @@ function handlePopUpUserSubmit(formData) {
   formUserValidation.resetValidation();
 
 }
-
 
 function openPopUpEditUser() {
 
@@ -89,7 +89,7 @@ function openPopUpEditUser() {
 buttonEditUser.addEventListener('click', openPopUpEditUser);
 
 
-/** edit avatar */
+/** EDIT AVATAR */
 const popUpEditAvatar = new initPopUp('.popup_change_avatar', handlePopUpAvatarSubmit)
 popUpEditAvatar.setEventListeners();
 
@@ -129,14 +129,9 @@ editAvatar.addEventListener('click', openPopUpEditAvatar);
 
 
 
-
-
-
-
 /** ADD PHOTO */
 
 const popUpAddCard = initPopUp('.popup_create_card', handlePopUpCardSubmit);
-
 popUpAddCard.setEventListeners();
 
 const popUpImage = new PopupWithImage('.popup.popup_zoom_img');
@@ -165,22 +160,68 @@ function createCard(formData) {
     handleCardClick: (cardData) => {
       popUpImage.open(cardData);
     },
+
+    handleCardRemove: handleCardRemove,
+    handleCardLike: ()=>{},
   });
 
   return card.generatePhotoCard();
 }
 
-function handlePopUpCardSubmit(formData) {
-  /** get generated card */
-  const photoCard = createCard(formData);
 
-  /** add dom */
-  cardAddSection.addItem(photoCard);
-  /** close popup add-card */
-  popUpAddCard.close();
+function handlePopUpCardSubmit(formData) {
+  popUpAddCard.changeButtonText('Создание...');
+
+  api.addPhotoCard(formData)
+  .then((cardData)=>{
+
+    /** get generated card */
+    const photoCard = createCard(cardData);
+
+    /** add dom */
+    cardAddSection.addItem(photoCard);
+    /** close popup add-card */
+    popUpAddCard.close();
+  })
+  .catch((err)=>{console.log(`Ошибка: ${err}`)})
+  .finally(()=>{ popUpAddCard.changeButtonText('Создать')})
 
   formCardValidation.resetValidation();
 }
+
+
+// CONFIRM POPUP
+function initPopUpConfirm(selector, handleFormConfirm){
+  const popUp = new PopupConfirm({
+    selector: selector,
+    handleFormConfirm: handleFormConfirm,
+  });
+  return popUp;
+}
+
+// const confirmPopup = initPopUpConfirm('.popup_confirm', test);
+// confirmPopup.setEventListeners();
+
+
+// function handleCardRemove(photoCardId) {
+//   confirmPopup.open();
+//   // confirmPopup.handleFormSubmit = () => {
+//   //   console.log('removing')
+//     // confirmPopup.changeButtonText('Удаление...')
+//     // // remove from server
+//     // api.removePhotoCard(photoCardId)
+//     // .then(()=>{
+//     //   // remove dom
+//     //   this.removePhotoCardDom();
+//     //   confirmPopup.close;
+//     // })
+//     // .catch((err) => console.log(`Ошибка: ${err}`))
+//     // .finally(() => {confirmPopup.changeButtonText('Да') })
+//   // }
+// }
+
+
+function handleCardLike(){}
 
 function addPhotoCard() {
   popUpAddCard.open();
@@ -191,7 +232,11 @@ buttonAddCard.addEventListener('click', addPhotoCard);
 
 
 /** add photocards from initialCards */
-cardAddSection.renderItems();
+// api.getGalleryData((cardList)=>{
+//   cardAddSection.itemList = cardList
+// })
+
+// cardAddSection.renderItems();
 
 
 /** validation */

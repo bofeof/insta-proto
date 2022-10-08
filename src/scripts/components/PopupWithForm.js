@@ -8,8 +8,8 @@ export class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
 
     this._popUpForm = this._popUpElement.querySelector('.popup__form-inputs');
+    this._inputList = this._popUpForm.querySelectorAll('.popup__input')
 
-    this._inputList = this._popUpForm.querySelectorAll('.popup__input');
 
     this._submitForm = (evt) => {
       evt.preventDefault();

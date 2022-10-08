@@ -1,11 +1,15 @@
 export class Card {
-  constructor({ data, templateSelector, handleCardClick }) {
+  constructor({ data, templateSelector, handleCardClick,  handleCardRemove, handleCardLike}) {
     this._templateSelector = templateSelector;
 
     this._data = data;
 
     /** open image popup by click */
     this._handleCardClick = handleCardClick;
+
+    this._handleCardRemove = handleCardRemove;
+
+    this._handleCardLike = handleCardLike;
   }
 
   _getTemplate() {
@@ -26,9 +30,9 @@ export class Card {
       '.gallery__item-photo'
     );
 
-    this._galleryItemName.textContent = this._data.photoName;
-    this._galleryItemPhoto.src = this._data.photoLink;
-    this._galleryItemPhoto.alt = this._data.photoName;
+    this._galleryItemName.textContent = this._data.name;
+    this._galleryItemPhoto.src = this._data.link;
+    this._galleryItemPhoto.alt = this._data.name;
 
     this._likeButton = this._galleryItem.querySelector('.gallery__like-button');
     this._removeButton = this._galleryItem.querySelector(
@@ -59,8 +63,15 @@ export class Card {
     this._likeButton.classList.toggle('gallery__like-button_active');
   }
 
+
   _removePhotoCard() {
+    this._handleCardRemove(this._data._id)
+  }
+
+  removePhotoCardDom(){
     this._galleryItem.remove();
     this._galleryItem = null;
   }
-}
+
+  }
+

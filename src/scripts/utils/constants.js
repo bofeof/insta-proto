@@ -41,6 +41,7 @@ const formUserInfoPopup = document.querySelector('.popup__form-userinfo');
 const formCardPopup = document.querySelector('.popup__form-photocard');
 const formAvatarPopup = document.querySelector('.popup__form-avatar');
 
+
 const configAPI = {
     mestoUrl: 'https://nomoreparties.co/v1/cohort-51',
     headers: {

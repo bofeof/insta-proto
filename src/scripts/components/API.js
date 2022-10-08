@@ -53,7 +53,7 @@ export class API {
 
   // response -> get data of created card
   addPhotoCard(cardData) {
-    return fetch(`${this._configAPI.mestoUrl}/cards`, {
+    return fetch(`${this._configAPI.mestoUrl}/cards/`, {
       method: 'POST',
       headers: this._configAPI.headers,
       body: JSON.stringify({

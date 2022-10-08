@@ -16,8 +16,8 @@ export class PopupWithImage extends Popup {
     super.open();
 
     /** set data to popup img */
-    this._popUpImgCard.src = data.photoLink;
-    this._popUpImgCaption.textContent = data.photoName;
-    this._popUpImgCard.alt = data.photoName;
+    this._popUpImgCard.src = data.link;
+    this._popUpImgCaption.textContent = data.name;
+    this._popUpImgCard.alt = data.name;
   }
 }
