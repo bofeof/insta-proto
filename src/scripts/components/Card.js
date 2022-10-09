@@ -1,12 +1,12 @@
 export class Card {
-  constructor(
+  constructor({
     data,
     templateSelector,
     handleCardClick,
     handleCardRemove,
     handleCardLike,
-    userId
-  ) {
+    userId,
+  }) {
     this._templateSelector = templateSelector;
 
     this._data = data;
@@ -21,6 +21,8 @@ export class Card {
     this._userId = userId;
 
     this._galleryItem = this._getTemplate();
+
+    this.photoCardId = this._data._id;
 
     this._galleryItemName = this._galleryItem.querySelector(
       '.gallery__item-name'
@@ -60,15 +62,15 @@ export class Card {
     return this._galleryItem;
   }
 
-  _hideRemoveBasketCard(){
-    if (this._data.owner._id !== this.userId) {
+  _hideRemoveBasketCard() {
+    if (this._data.owner._id !== this._userId) {
       this._removeButton.style.display = 'none';
     }
   }
 
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
-      this.handleCardLike(this._data._id);
+      this._handleCardLike(this._data._id);
     });
 
     this._removeButton.addEventListener('click', () => {
@@ -77,13 +79,13 @@ export class Card {
 
     /** zoom */
     this._galleryItemPhoto.addEventListener('click', () => {
-      this.handleCardClick(this._data);
+      this._handleCardClick(this._data);
     });
   }
 
   /** check if card is liked by current user */
   isLiked() {
-    return !!this._data.likes.find((user) => user._id === this.userId)
+    return !!this._data.likes.find((user) => user._id === this._userId);
   }
 
   /** set likes after icon click */
@@ -91,11 +93,11 @@ export class Card {
     this._galleryItemLikeCounter.textContent = likes.length;
     this._data.likes = likes;
 
-    if (this.isLiked()){
+    if (this.isLiked()) {
       if (!this._likeButton.classList.contains('gallery__like-button_active')) {
         this._likeButton.classList.add('gallery__like-button_active');
       }
-    } else{
+    } else {
       if (this._likeButton.classList.contains('gallery__like-button_active')) {
         this._likeButton.classList.remove('gallery__like-button_active');
       }
@@ -103,7 +105,7 @@ export class Card {
   }
 
   _removePhotoCard() {
-    this.handleCardRemove(this._data._id);
+    this._handleCardRemove(this._data._id);
   }
 
   deletePhotoCard() {
