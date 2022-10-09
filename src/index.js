@@ -65,7 +65,7 @@ function userFormSubmit(formData){
   api.setUserData(formData)
   .then((data) => {
     user.setUserInfo({name: data.name, about : data.about});
-    user.setUserAvatar({avatar: data.avatar});
+    user.setUserAvatar(data);
 
   })
   .catch((err) => console.log(`Ошибка: ${err}`))
@@ -98,10 +98,29 @@ buttonEditUser.addEventListener('click', openPopUpEditUser);
 
 
 
-
 /** EDIT AVATAR */
-const popUpEditAvatar = new initPopUp('.popup_change_avatar')
+const popUpEditAvatar = new initPopUp('.popup_change_avatar', avatarFormSubmit)
 popUpEditAvatar.setEventListeners();
+
+/**  submit new avatar to server and dom */
+function avatarFormSubmit(formData){
+  popUpEditAvatar.changeButtonText('Сохранение...');
+
+  /** set data to server and update dom */
+  api.changeUserAvatar(formData)
+  .then((data) => {
+    api.changeUserAvatar(formData);
+    user.setUserAvatar(formData);
+    popUpEditAvatar.close();
+  })
+  .catch((err) => console.log(`Ошибка: ${err}`))
+  .finally(() => popUpEditAvatar.changeButtonText('Сохранить'))
+
+  formUserValidation.resetValidation();
+
+};
+
+
 
 function openPopUpEditAvatar(){
   /**  open edit-user popup and set listeners */
@@ -111,26 +130,7 @@ function openPopUpEditAvatar(){
   const userData = user.getUserInfo();
 
   /** set data to input form (current link) */
-  popUpEditAvatar.setInputValues({'.popup__input_form_avatar' : userData.avatar})
-
-  /**  submit new avatar to server and dom */
-  popUpEditAvatar.handleFormSubmit = (formData) => {
-
-    popUpEditAvatar.changeButtonText('Сохранение...');
-
-    /** set data to server and update dom */
-    api.changeUserAvatar(formData)
-    .then((data) => {
-      api.changeUserAvatar({avatar: formData.avatar});
-      user.setUserAvatar({avatar: formData.avatar});
-      popUpEditAvatar.close();
-    })
-    .catch((err) => console.log(`Ошибка: ${err}`))
-    .finally(() => popUpEditAvatar.changeButtonText('Сохранить'))
-
-    formUserValidation.resetValidation();
-
-  };
+  popUpEditAvatar.setInputValues(userData);
 
   formAvatarValidation.resetValidation();
 }
