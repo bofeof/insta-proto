@@ -1,15 +1,14 @@
 import { Popup } from './Popup.js';
-PopupConfirm;
 export class PopupConfirm extends Popup {
   constructor({ selector, handleFormSubmit }) {
     super(selector);
 
     /**  submit form callback */
-    this.handleFormSubmit = handleFormSubmit;
+    this._handleFormSubmit = handleFormSubmit;
 
     this._submitForm = (evt) => {
       evt.preventDefault();
-      this.handleFormSubmit();
+      this._handleFormSubmit();
     };
 
     this._submitButton = this._popUpElement.querySelector(
@@ -26,7 +25,4 @@ export class PopupConfirm extends Popup {
     this._submitButton.addEventListener('click', this._submitForm);
   }
 
-  close() {
-    super.close();
-  }
 }

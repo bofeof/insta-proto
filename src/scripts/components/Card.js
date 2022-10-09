@@ -12,13 +12,13 @@ export class Card {
     this._data = data;
 
     /** open image popup by click */
-    this.handleCardClick = handleCardClick;
+    this._handleCardClick = handleCardClick;
 
-    this.handleCardRemove = handleCardRemove;
+    this._handleCardRemove = handleCardRemove;
 
-    this.handleCardLike = handleCardLike;
+    this._handleCardLike = handleCardLike;
 
-    this.userId = userId;
+    this._userId = userId;
 
     this._galleryItem = this._getTemplate();
 
@@ -51,16 +51,19 @@ export class Card {
     this._galleryItemPhoto.alt = this._data.name;
 
     this.setCardLikes(this._data.likes);
-    // this._galleryItemLikeCounter.textContent = this._data.likes.length;
 
-    /**  show remove-basket */
-    if (this._data.owner._id !== this.userId) {
-      this._removeButton.style.display = 'none';
-    }
+    /** basket should be available for cards (created by current user)*/
+    this._hideRemoveBasketCard();
 
     this._setEventListeners();
 
     return this._galleryItem;
+  }
+
+  _hideRemoveBasketCard(){
+    if (this._data.owner._id !== this.userId) {
+      this._removeButton.style.display = 'none';
+    }
   }
 
   _setEventListeners() {
@@ -78,29 +81,25 @@ export class Card {
     });
   }
 
-  _activateLike() {
-    if (!this._likeButton.classList.contains('gallery__like-button_active')) {
-      this._likeButton.classList.add('gallery__like-button_active');
-    }
-  }
-
-  _deactivateLike() {
-    if (this._likeButton.classList.contains('gallery__like-button_active')) {
-      this._likeButton.classList.remove('gallery__like-button_active');
-    }
-  }
-
+  /** check if card is liked by current user */
   isLiked() {
-    if (this._data.likes.find((user) => user._id === this.userId)) {
-      return true;
-    }
+    return !!this._data.likes.find((user) => user._id === this.userId)
   }
 
   /** set likes after icon click */
   setCardLikes(likes) {
     this._galleryItemLikeCounter.textContent = likes.length;
     this._data.likes = likes;
-    this.isLiked() ? this._activateLike() : this._deactivateLike();
+
+    if (this.isLiked()){
+      if (!this._likeButton.classList.contains('gallery__like-button_active')) {
+        this._likeButton.classList.add('gallery__like-button_active');
+      }
+    } else{
+      if (this._likeButton.classList.contains('gallery__like-button_active')) {
+        this._likeButton.classList.remove('gallery__like-button_active');
+      }
+    }
   }
 
   _removePhotoCard() {
