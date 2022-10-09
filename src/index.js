@@ -39,7 +39,6 @@ function initPopUp(selector, handleFormSubmit) {
 }
 
 
-
 /** EDIT USER */
 const user = new UserInfo('.user__name', '.user__job', '.user__avatar');
 const popUpEditUser = initPopUp('.popup_edit_user', handlePopUpUserSubmit);
@@ -190,15 +189,8 @@ function handlePopUpCardSubmit(formData) {
 }
 
 
-// CONFIRM POPUP
-// function initPopUpConfirm(selector, handleFormConfirm){
-//   const popUp = new PopupConfirm({
-//     selector: selector,
-//     handleFormConfirm: handleFormConfirm,
-//   });
-//   return popUp;
-// }
 
+// confirm popup
 const confirmPopup = new PopupConfirm({selector:'.popup_confirm'});
 confirmPopup.setEventListeners();
 
@@ -208,43 +200,21 @@ function handleCardRemove(photoCardId) {
   confirmPopup.open();
 
   confirmPopup.handleFormSubmit = () => {
-    console.log('нажали да');
     confirmPopup.changeButtonText('Удаление...')
     // remove from server
     api.removePhotoCard(photoCardId)
     .then(() =>
       // remove dom
-      console.log('удалена с сервера')
-      // card.removePhotoCard()
+      card.deletePhotoCard()
     )
     .catch((err)=> {console.log(`Ошибка: ${err}`)})
     .finally(confirmPopup.changeButtonText('Да'))
-
 
     confirmPopup.close()
 
   }
 
 }
-
-
-
-// function handleCardRemove(photoCardId) {
-//   confirmPopup.open();
-//   // confirmPopup.handleFormSubmit = () => {
-//   //   console.log('removing')
-//     // confirmPopup.changeButtonText('Удаление...')
-//     // // remove from server
-//     // api.removePhotoCard(photoCardId)
-//     // .then(()=>{
-//     //   // remove dom
-//     //   this.removePhotoCardDom();
-//     //   confirmPopup.close;
-//     // })
-//     // .catch((err) => console.log(`Ошибка: ${err}`))
-//     // .finally(() => {confirmPopup.changeButtonText('Да') })
-//   // }
-// }
 
 
 function handleCardLike(){}

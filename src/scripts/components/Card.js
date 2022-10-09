@@ -68,7 +68,7 @@ export class Card {
     this._handleCardRemove(this._data._id)
   }
 
-  removePhotoCardDom(){
+  deletePhotoCard(){
     this._galleryItem.remove();
     this._galleryItem = null;
   }
