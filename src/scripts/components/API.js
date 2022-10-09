@@ -64,12 +64,13 @@ export class API {
     .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
   }
 
+
   removePhotoCard(photoCardId){
-    return fetch(`${this._configAPI.mestoUrl}/cards/${photoCardId}`, {
-      method: 'DELETE',
-      headers: this._configAPI.header,
-    })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+    return  fetch(`${this._configAPI.mestoUrl}/cards/${photoCardId}`, {
+          method: 'DELETE',
+          headers: this._configAPI.headers,
+        })
+        .then((res) => !res.ok ? Promise.reject(`Ошибка: ${res.status}`) : res.json)
   }
 
   addPhotoLike(photoCardId) {

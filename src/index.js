@@ -23,7 +23,7 @@ import { API } from './scripts/components/API.js';
 import { FormValidator } from './scripts/components/FormValidator.js';
 
 import './styles/index.css';
-import { ConcatenationScope } from 'webpack';
+
 
 const api = new API(configAPI);
 
@@ -191,16 +191,42 @@ function handlePopUpCardSubmit(formData) {
 
 
 // CONFIRM POPUP
-function initPopUpConfirm(selector, handleFormConfirm){
-  const popUp = new PopupConfirm({
-    selector: selector,
-    handleFormConfirm: handleFormConfirm,
-  });
-  return popUp;
+// function initPopUpConfirm(selector, handleFormConfirm){
+//   const popUp = new PopupConfirm({
+//     selector: selector,
+//     handleFormConfirm: handleFormConfirm,
+//   });
+//   return popUp;
+// }
+
+const confirmPopup = new PopupConfirm({selector:'.popup_confirm'});
+confirmPopup.setEventListeners();
+
+
+function handleCardRemove(photoCardId) {
+
+  confirmPopup.open();
+
+  confirmPopup.handleFormSubmit = () => {
+    console.log('нажали да');
+    confirmPopup.changeButtonText('Удаление...')
+    // remove from server
+    api.removePhotoCard(photoCardId)
+    .then(() =>
+      // remove dom
+      console.log('удалена с сервера')
+      // card.removePhotoCard()
+    )
+    .catch((err)=> {console.log(`Ошибка: ${err}`)})
+    .finally(confirmPopup.changeButtonText('Да'))
+
+
+    confirmPopup.close()
+
+  }
+
 }
 
-// const confirmPopup = initPopUpConfirm('.popup_confirm', test);
-// confirmPopup.setEventListeners();
 
 
 // function handleCardRemove(photoCardId) {
