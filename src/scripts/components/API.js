@@ -1,12 +1,11 @@
 export class API {
-
   constructor(configAPI) {
     this._configAPI = configAPI;
   }
 
-  // get response from all request
-  _getResponse(res){
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+  /**  get response from all request */
+  _getResponse(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
   }
 
 
@@ -17,12 +16,11 @@ export class API {
     return fetch(`${this._configAPI.mestoUrl}/users/me`, {
       method: 'GET',
       headers: this._configAPI.headers,
-    })
-    .then((res) => this._getResponse(res))
+    }).then((res) => this._getResponse(res));
   }
 
-  // userInfo = {name: .., about: ...}
-  // response => get new user-info
+  /*  userData = {name: .., about: ...}
+      response => get new user-info **/
   setUserData(userData) {
     return fetch(`${this._configAPI.mestoUrl}/users/me`, {
       method: 'PATCH',
@@ -31,33 +29,31 @@ export class API {
         name: userData.name,
         about: userData.about,
       }),
-    })
-    .then((res) => this._getResponse(res))
+    }).then((res) => this._getResponse(res));
   }
 
-  changeUserAvatar(userData){
+  changeUserAvatar(userData) {
     return fetch(`${this._configAPI.mestoUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._configAPI.headers,
       body: JSON.stringify({
         avatar: userData.avatar,
       }),
-    })
-    .then((res) => this._getResponse(res))
+    }).then((res) => this._getResponse(res));
   }
+
 
   /** CARDS */
 
-  // get current cards data from server
+  /** get current cards data from server */
   getGalleryData() {
     return fetch(`${this._configAPI.mestoUrl}/cards`, {
       method: 'GET',
       headers: this._configAPI.headers,
-    })
-    .then((res) => this._getResponse(res))
+    }).then((res) => this._getResponse(res));
   }
 
-  // response -> get data of created card
+  /**  response -> get data of created card */
   addPhotoCard(cardData) {
     return fetch(`${this._configAPI.mestoUrl}/cards/`, {
       method: 'POST',
@@ -66,33 +62,27 @@ export class API {
         name: cardData.name,
         link: cardData.link,
       }),
-    })
-    .then((res) => this._getResponse(res))
+    }).then((res) => this._getResponse(res));
   }
 
-
-  removePhotoCard(photoCardId){
-    return  fetch(`${this._configAPI.mestoUrl}/cards/${photoCardId}`, {
-          method: 'DELETE',
-          headers: this._configAPI.headers,
-        })
-        .then((res) => this._getResponse(res))
+  removePhotoCard(photoCardId) {
+    return fetch(`${this._configAPI.mestoUrl}/cards/${photoCardId}`, {
+      method: 'DELETE',
+      headers: this._configAPI.headers,
+    }).then((res) => this._getResponse(res));
   }
 
   addPhotoLike(photoCardId) {
     return fetch(`${this._configAPI.mestoUrl}/cards/${photoCardId}/likes`, {
       method: 'PUT',
       headers: this._configAPI.headers,
-    })
-    .then((res) => this._getResponse(res))
+    }).then((res) => this._getResponse(res));
   }
 
-  removePhotoLike(photoCardId){
+  removePhotoLike(photoCardId) {
     return fetch(`${this._configAPI.mestoUrl}/cards/${photoCardId}/likes`, {
       method: 'DELETE',
       headers: this._configAPI.headers,
-    })
-    .then((res) => this._getResponse(res))
+    }).then((res) => this._getResponse(res));
   }
-
 }

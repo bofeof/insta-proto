@@ -1,27 +1,27 @@
 const initialCards = [
   {
-    photoName: 'Архыз',
-    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
-    photoName: 'Челябинская область',
-    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-    photoName: 'Иваново',
-    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
-    photoName: 'Камчатка',
-    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
-    photoName: 'Холмогорский район',
-    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-    photoName: 'Байкал',
-    photoLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
 
@@ -50,4 +50,6 @@ const configAPI = {
     }
   }
 
-export {initialCards, validationConfig, buttonEditUser, buttonAddCard, editAvatar, formUserInfoPopup, formCardPopup, formAvatarPopup, configAPI};
+const userId = 'c0fe93bd02816e72b575c7ab'
+
+export {initialCards, validationConfig, buttonEditUser, buttonAddCard, editAvatar, formUserInfoPopup, formCardPopup, formAvatarPopup, configAPI, userId};

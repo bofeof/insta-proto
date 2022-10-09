@@ -8,8 +8,7 @@ export class PopupWithForm extends Popup {
     this.handleFormSubmit = handleFormSubmit;
 
     this._popUpForm = this._popUpElement.querySelector('.popup__form-inputs');
-    this._inputList = this._popUpForm.querySelectorAll('.popup__input')
-
+    this._inputList = this._popUpForm.querySelectorAll('.popup__input');
 
     this._submitForm = (evt) => {
       evt.preventDefault();
@@ -38,10 +37,9 @@ export class PopupWithForm extends Popup {
     });
   }
 
-  changeButtonText(text){
+  changeButtonText(text) {
     this._submitButton.textContent = text;
   }
-
 
   setEventListeners() {
     super.setEventListeners();

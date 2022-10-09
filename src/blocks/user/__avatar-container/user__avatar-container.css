@@ -1,4 +1,4 @@
-.user__avatar-container{
+.user__avatar-container {
   height: 120px;
   width: 120px;
   margin-right: 26.25px;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .user__avatar-container{
+  .user__avatar-container {
     align-items: center;
     margin: 0 auto;
   }

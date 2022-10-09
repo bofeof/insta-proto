@@ -11,7 +11,13 @@ export class Section {
     });
   }
 
-  addItem(element) {
+  /** for 1 card */
+  addNewItem(element) {
     this._container.prepend(element);
+  }
+
+  /** for list of cards */
+  addItem(element) {
+    this._container.append(element);
   }
 }
