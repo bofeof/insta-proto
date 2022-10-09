@@ -36,20 +36,20 @@ Promise.all([api.getUserData(), api.getGalleryData()])
   user.setUserInfo({name: userData.name, about : userData.about});
   user.setUserAvatar({avatar: userData.avatar});
 
-  // cards .renderer
+  // cards
+  cardAddSection.itemList = cardsData;
+  cardAddSection.renderItems()
 
 })
 .catch((err) => console.log(`Ошибка: ${err}`))
 
 
 
-
-
 /** init popup form with inputs: for card and user */
-function initPopUp(selector, handleFormSubmit) {
+function initPopUp(selector) {
   const popUp = new PopupWithForm({
-    selector: selector,
-    handleFormSubmit: handleFormSubmit,
+    selector: selector
+    // handleFormSubmit: ()=>{}),
   });
 
   return popUp;
@@ -58,29 +58,27 @@ function initPopUp(selector, handleFormSubmit) {
 
 /** EDIT USER */
 const user = new UserInfo('.user__name', '.user__job', '.user__avatar');
-const popUpEditUser = initPopUp('.popup_edit_user', handlePopUpUserSubmit);
+const popUpEditUser = initPopUp('.popup_edit_user');  // handlePopUpUserSubmit - in popUpEditUser
 popUpEditUser.setEventListeners();
 
 
 
-/** set new user data after submit */
-function handlePopUpUserSubmit(formData) {
+// /** set new user data after submit */
+// popUpEditUser.handleFormSubmit = (formData) => {
 
-  popUpEditUser.changeButtonText('Сохранение...');
+//   popUpEditUser.changeButtonText('Сохранение...');
+//   /** set data to server and update dom */
+//   api.setUserData(formData)
+//   .then((data) => {
+//     user.setUserInfo({name: data.name, about : data.about});
+//     user.setUserAvatar({avatar: data.avatar});
+//     popUpEditUser.close();
+//   })
+//   .catch((err) => console.log(`Ошибка: ${err}`))
+//   .finally(() => popUpEditUser.changeButtonText('Сохранить'))
 
-  /** set data to server and update dom */
-  api.setUserData(formData)
-  .then((data) => {
-    user.setUserInfo({name: data.name, about : data.about});
-    user.setUserAvatar({avatar: data.avatar});
-    popUpEditUser.close();
-  })
-  .catch((err) => console.log(`Ошибка: ${err}`))
-  .finally(() => popUpEditUser.changeButtonText('Сохранить'))
-
-  formUserValidation.resetValidation();
-
-}
+//   formUserValidation.resetValidation();
+// }
 
 function openPopUpEditUser() {
 
@@ -90,10 +88,28 @@ function openPopUpEditUser() {
   /** get inputs-value from dom-data */
   const userData = user.getUserInfo();
 
-  /** set data {selector: data, selector: data} */
+  /** set data {selector: data, selector: data} to DOM*/
   const userInputData = {'.popup__input_form_name': userData.name, '.popup__input_form_job': userData.about}
   popUpEditUser.setInputValues(userInputData);
 
+
+  /** set new user data after submit (server, dom) */
+  popUpEditUser.handleFormSubmit = (formData) => {
+
+    popUpEditUser.changeButtonText('Сохранение...');
+
+    /** set data to server and update dom */
+    api.setUserData(formData)
+    .then((data) => {
+      user.setUserInfo({name: data.name, about : data.about});
+      user.setUserAvatar({avatar: data.avatar});
+      popUpEditUser.close();
+    })
+    .catch((err) => console.log(`Ошибка: ${err}`))
+    .finally(() => popUpEditUser.changeButtonText('Сохранить'))
+
+    formUserValidation.resetValidation();
+}
   formUserValidation.resetValidation();
 }
 
@@ -101,37 +117,37 @@ buttonEditUser.addEventListener('click', openPopUpEditUser);
 
 
 /** EDIT AVATAR */
-const popUpEditAvatar = new initPopUp('.popup_change_avatar', handlePopUpAvatarSubmit)
+const popUpEditAvatar = new initPopUp('.popup_change_avatar')
 popUpEditAvatar.setEventListeners();
 
-function handlePopUpAvatarSubmit(formData){
-
-  popUpEditAvatar.changeButtonText('Сохранение...');
-
-  // set data to server and update dom
-  api.changeUserAvatar(formData)
-  .then((data) => {
-    api.changeUserAvatar({avatar: formData.avatar});
-    user.setUserAvatar({avatar: formData.avatar});
-    popUpEditAvatar.close();
-  })
-  .catch((err) => console.log(`Ошибка: ${err}`))
-  .finally(() => popUpEditAvatar.changeButtonText('Сохранить'))
-
-  formUserValidation.resetValidation();
-
-};
-
 function openPopUpEditAvatar(){
-
   /**  open edit-user popup and set listeners */
   popUpEditAvatar.open();
 
 /** get inputs-value from dom-data */
   const userData = user.getUserInfo();
 
-  /** set data {selector: data, selector: data} */
+  /** set data to input form (current link) */
   popUpEditAvatar.setInputValues({'.popup__input_form_avatar' : userData.avatar})
+
+  // submit new avatar to server and dom
+  popUpEditAvatar.handleFormSubmit = (formData) => {
+
+    popUpEditAvatar.changeButtonText('Сохранение...');
+
+    // set data to server and update dom
+    api.changeUserAvatar(formData)
+    .then((data) => {
+      api.changeUserAvatar({avatar: formData.avatar});
+      user.setUserAvatar({avatar: formData.avatar});
+      popUpEditAvatar.close();
+    })
+    .catch((err) => console.log(`Ошибка: ${err}`))
+    .finally(() => popUpEditAvatar.changeButtonText('Сохранить'))
+
+    formUserValidation.resetValidation();
+
+  };
 
   formAvatarValidation.resetValidation();
 }
@@ -140,15 +156,19 @@ editAvatar.addEventListener('click', openPopUpEditAvatar);
 
 
 
-/** ADD PHOTO */
+// /** ADD PHOTO */
 
-const popUpAddCard = initPopUp('.popup_create_card', handlePopUpCardSubmit);
+const popUpAddCard = initPopUp('.popup_create_card');
 popUpAddCard.setEventListeners();
 
 const popUpImage = new PopupWithImage('.popup.popup_zoom_img');
 popUpImage.setEventListeners();
 
-const cardAddSection = initCardSection(initialCards, renderCard, '.gallery');
+// confirm popup
+const confirmPopup = new PopupConfirm({selector:'.popup_confirm'});
+confirmPopup.setEventListeners();
+
+const cardAddSection = initCardSection([], renderCard, '.gallery');
 
 /** init card section for new photo: ({list of items(cards), render func}, section selector) */
 function initCardSection(itemList, renderer, selector) {
@@ -156,95 +176,113 @@ function initCardSection(itemList, renderer, selector) {
   return cardSection
 }
 
+
 function renderCard(item) {
+
   const photoCard = createCard(item);
+
   /** add dom */
   cardAddSection.addItem(photoCard);
 }
 
+
+// create new card with listeners
 function createCard(formData) {
-  const card = new Card({
-    data: formData,
-    templateSelector: '#photocard',
+  const photoCard = new Card(formData, '#photocard')
+  photoCard.userId = userId;
 
-    /** img popup func */
-    handleCardClick: (cardData) => {
-      popUpImage.open(cardData);
-    },
-
-    handleCardRemove: handleCardRemove,
-    handleCardLike: ()=>{},
-  });
-
-  return card.generatePhotoCard();
-}
-
-
-function handlePopUpCardSubmit(formData) {
-  popUpAddCard.changeButtonText('Создание...');
-
-  api.addPhotoCard(formData)
-  .then((cardData)=>{
-
-    /** get generated card */
-    const photoCard = createCard(cardData);
-
-    /** add dom */
-    cardAddSection.addItem(photoCard);
-    /** close popup add-card */
-    popUpAddCard.close();
-  })
-  .catch((err)=>{console.log(`Ошибка: ${err}`)})
-  .finally(()=>{ popUpAddCard.changeButtonText('Создать')})
-
-  formCardValidation.resetValidation();
-}
-
-
-
-// confirm popup
-const confirmPopup = new PopupConfirm({selector:'.popup_confirm'});
-confirmPopup.setEventListeners();
-
-
-function handleCardRemove(photoCardId) {
-
-  confirmPopup.open();
-
-  confirmPopup.handleFormSubmit = () => {
-    confirmPopup.changeButtonText('Удаление...')
-    // remove from server
-    api.removePhotoCard(photoCardId)
-    .then(() =>
-      // remove dom
-      card.deletePhotoCard()
-    )
-    .catch((err)=> {console.log(`Ошибка: ${err}`)})
-    .finally(confirmPopup.changeButtonText('Да'))
-
-    confirmPopup.close()
-
+  // CARDS ACTIONS
+  // zoom card
+  photoCard.handleCardClick = (cardData) => {
+    popUpImage.open(cardData)
   }
 
+  // remove card
+  photoCard.handleCardRemove = (photoCardId) => {
+    confirmPopup.open();
+
+    confirmPopup.handleFormSubmit = () => {
+      confirmPopup.changeButtonText('Удаление...')
+      // remove from server
+      api.removePhotoCard(photoCardId)
+      .then(() =>
+        // remove dom
+        photoCard.deletePhotoCard()
+      )
+      .catch((err)=> {console.log(`Ошибка: ${err}`)})
+      .finally(confirmPopup.changeButtonText('Да'))
+
+      confirmPopup.close()
+    }
+  }
+
+  // like card
+  photoCard.handleCardLike = (photoCardId) => {
+
+  // const statusLike = photoCard.clickLike();
+
+  // if(statusLike){
+  //   api.addPhotoLike(photoCardId)
+  //   .then((res) => card.setCardLikes(res.likes))
+  //   .catch((err) => console.log(`Ошибка: ${err}`))
+  // } else {
+  //   api.removePhotoLike(photoCardId)
+  //     .then((res) => card.setCardLikes(res.likes))
+  //     .catch((err) => console.log(`Ошибка: ${err}`))
+  // }
+
+  if (photoCard.isLiked()) {
+    api.removePhotoLike(photoCardId)
+      .then((res) => photoCard.setCardLikes(res.likes))
+      .catch((err) => console.log(`Ошибка: ${err}`))
+  } else {
+    api.addPhotoLike(photoCardId)
+      .then((res) => photoCard.setCardLikes(res.likes))
+      .catch((err) => console.log(`Ошибка: ${err}`))
+  }
+
+
+
+}
+
+const newCard = photoCard.generatePhotoCard()
+return newCard
+
 }
 
 
-function handleCardLike(){}
-
-function addPhotoCard() {
+function openPopUpAddCard() {
   popUpAddCard.open();
+
+  // submit card
+  popUpAddCard.handleFormSubmit = (formData) => {
+
+    popUpAddCard.changeButtonText('Создание...');
+
+    api.addPhotoCard(formData)
+    .then((cardData)=>{
+
+      /** get generated card */
+      const photoCard = createCard(cardData);
+
+      cardAddSection.addItem(photoCard);
+
+      /** close popup add-card */
+      popUpAddCard.close();
+
+    })
+    .catch((err)=>{console.log(`Ошибка: ${err}`)})
+    .finally(()=>{ popUpAddCard.changeButtonText('Создать')})
+
+    formCardValidation.resetValidation();
+}
+
   formCardValidation.resetValidation();
 }
 
-buttonAddCard.addEventListener('click', addPhotoCard);
+buttonAddCard.addEventListener('click', openPopUpAddCard);
 
 
-/** add photocards from initialCards */
-// api.getGalleryData((cardList)=>{
-//   cardAddSection.itemList = cardList
-// })
-
-// cardAddSection.renderItems();
 
 
 /** validation */
