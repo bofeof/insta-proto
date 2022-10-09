@@ -15,7 +15,7 @@
         <div class="user__avatar-container user__avatar-editor">
           <img
             class="user__avatar"
-            src=""
+            src="<%=require('./images/avatar.jpg')%>"
             alt="Фото пользователя"
           />
           <div class="user__avatar-overlay">
@@ -25,10 +25,10 @@
 
         <div class="user__info">
           <div class="user__header">
-            <h1 class="user__name"></h1>
+            <h1 class="user__name">Жак-Ив Кусто</h1>
             <button type="button" class="user__edit-button"></button>
           </div>
-          <p class="user__job"></p>
+          <p class="user__job">Французский исследователь Мирового океана</p>
         </div>
         <button class="user__add-button" type="button"></button>
       </section>
@@ -176,10 +176,10 @@
                 type="url"
                 name="avatar"
                 placeholder="Ссылка на аватар"
-                id="url-input"
+                id="url-input-avatar"
                 required
               />
-              <span class="popup__input-error url-input-error"></span>
+              <span class="popup__input-error url-input-avatar-error"></span>
 
               <button
                 class="popup__button popup__submit-button popup__save-button"
