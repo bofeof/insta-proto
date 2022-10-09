@@ -64,6 +64,14 @@ export class Card {
   }
 
 
+  isLiked(){
+    return this._data._likes.find((user) => user._id === this.data.owner._id)
+  }
+
+  setLikes(){
+    this._galleryItem.querySelector('.gallery__like-counter').textContent = this._data.likes.length
+  }
+
   _removePhotoCard() {
     this._handleCardRemove(this._data._id)
   }
@@ -73,5 +81,5 @@ export class Card {
     this._galleryItem = null;
   }
 
-  }
+}
 

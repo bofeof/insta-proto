@@ -27,23 +27,6 @@ import './styles/index.css';
 
 const api = new API(configAPI);
 
-const userId = 'c0fe93bd02816e72b575c7ab'
-
-// get current user info, cards from server
-Promise.all([api.getUserData(), api.getGalleryData()])
-.then(([userData, cardsData]) => {
-  // user
-  user.setUserInfo({name: userData.name, about : userData.about});
-  user.setUserAvatar({avatar: userData.avatar});
-
-  // cards .renderer
-
-})
-.catch((err) => console.log(`Ошибка: ${err}`))
-
-
-
-
 
 /** init popup form with inputs: for card and user */
 function initPopUp(selector, handleFormSubmit) {
@@ -61,7 +44,12 @@ const user = new UserInfo('.user__name', '.user__job', '.user__avatar');
 const popUpEditUser = initPopUp('.popup_edit_user', handlePopUpUserSubmit);
 popUpEditUser.setEventListeners();
 
-
+// get current user info from server
+api.getUserData()
+.then((data) => {
+  user.setUserInfo({name: data.name, about : data.about});
+  user.setUserAvatar({avatar: data.avatar});
+})
 
 /** set new user data after submit */
 function handlePopUpUserSubmit(formData) {
