@@ -4,6 +4,12 @@ export class API {
     this._configAPI = configAPI;
   }
 
+  // get response from all request
+  _getResponse(res){
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+  }
+
+
   /** USER */
 
   /** {name, about, avatar, _id, cohort} */
@@ -12,7 +18,7 @@ export class API {
       method: 'GET',
       headers: this._configAPI.headers,
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+    .then((res) => this._getResponse(res))
   }
 
   // userInfo = {name: .., about: ...}
@@ -26,7 +32,7 @@ export class API {
         about: userData.about,
       }),
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+    .then((res) => this._getResponse(res))
   }
 
   changeUserAvatar(userData){
@@ -37,7 +43,7 @@ export class API {
         avatar: userData.avatar,
       }),
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+    .then((res) => this._getResponse(res))
   }
 
   /** CARDS */
@@ -48,7 +54,7 @@ export class API {
       method: 'GET',
       headers: this._configAPI.headers,
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+    .then((res) => this._getResponse(res))
   }
 
   // response -> get data of created card
@@ -61,7 +67,7 @@ export class API {
         link: cardData.link,
       }),
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+    .then((res) => this._getResponse(res))
   }
 
 
@@ -70,7 +76,7 @@ export class API {
           method: 'DELETE',
           headers: this._configAPI.headers,
         })
-        .then((res) => !res.ok ? Promise.reject(`Ошибка: ${res.status}`) : res.json)
+        .then((res) => this._getResponse(res))
   }
 
   addPhotoLike(photoCardId) {
@@ -78,7 +84,7 @@ export class API {
       method: 'PUT',
       headers: this._configAPI.headers,
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+    .then((res) => this._getResponse(res))
   }
 
   removePhotoLike(photoCardId){
@@ -86,7 +92,7 @@ export class API {
       method: 'DELETE',
       headers: this._configAPI.headers,
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+    .then((res) => this._getResponse(res))
   }
 
 }
