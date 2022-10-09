@@ -72,10 +72,10 @@ function handleUserFormSubmit(formData) {
     .then((data) => {
       user.setUserInfo({ name: data.name, about: data.about });
       user.setUserAvatar(data);
+      popUpEditUser.close();
     })
     .catch((err) => console.log(`Ошибка: ${err}`))
     .finally(() => {
-      popUpEditUser.close();
       popUpEditUser.changeButtonText('Сохранить');
     });
 
