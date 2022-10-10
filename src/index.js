@@ -111,7 +111,6 @@ function handleAvatarFormSubmit(formData) {
   api
     .changeUserAvatar(formData)
     .then((data) => {
-      api.changeUserAvatar(formData);
       user.setUserAvatar(formData);
       popUpEditAvatar.close();
     })
@@ -204,9 +203,9 @@ function renderCard(cardData) {
 }
 
 // create new card with listeners
-function createCard(formData) {
+function createCard(cardData) {
   const photoCard = new Card({
-    data: formData,
+    data: cardData,
 
     templateSelector: '#photocard',
 

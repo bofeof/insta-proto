@@ -1,7 +1,7 @@
 import { Popup } from './Popup.js';
 
 export class PopupWithForm extends Popup {
-  constructor({selector, handleFormSubmit}) {
+  constructor({ selector, handleFormSubmit }) {
     super(selector);
 
     /**  submit form callback */
@@ -31,9 +31,9 @@ export class PopupWithForm extends Popup {
   }
 
   setInputValues(data) {
-    this._inputList.forEach(input => {
-      input.value = data[input.name]
-  })
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    });
   }
 
   changeButtonText(text) {
