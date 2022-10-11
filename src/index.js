@@ -25,43 +25,70 @@ import { FormValidator } from './scripts/components/FormValidator.js';
 
 import './styles/index.css';
 
+
+// CONST
+
 const api = new API(configAPI);
 
-// get current user info, cards from server
-Promise.all([api.getUserData(), api.getGalleryData()])
-  .then(([userData, cardsData]) => {
-    // user
-    user.setUserInfo({ name: userData.name, about: userData.about });
-    user.setUserAvatar({ avatar: userData.avatar });
+const formUserValidation = new FormValidator(
+  validationConfig,
+  formUserInfoPopup
+);
+const formCardValidation = new FormValidator(validationConfig, formCardPopup);
+const formAvatarValidation = new FormValidator(
+  validationConfig,
+  formAvatarPopup
+);
 
-    // cards
-    cardAddSection.renderItems(cardsData);
-  })
-  .catch((err) => console.log(`Ошибка: ${err}`));
-
-/** init popup form with inputs: for card and user */
-function initPopUp(selector, handleFormSubmit) {
-  const popUp = new PopupWithForm({
-    selector: selector,
-    handleFormSubmit: handleFormSubmit,
-  });
-  return popUp;
-}
-
-/** init popup confirm for removing */
-function initPopUpConfirm(selector, handleFormSubmit) {
-  const popUp = new PopupConfirm({
-    selector: selector,
-    handleFormSubmit: handleFormSubmit,
-  });
-  return popUp;
-}
-
-/** EDIT USER */
+/** edit user */
 const user = new UserInfo('.user__name', '.user__job', '.user__avatar');
 const popUpEditUser = initPopUp('.popup_edit_user', handleUserFormSubmit);
+
+/** edit avatar*/
+const popUpEditAvatar = new initPopUp(
+  '.popup_change_avatar',
+  handleAvatarFormSubmit
+);
+
+/** photocard */
+const popUpAddCard = initPopUp('.popup_create_card', handleCardFormSubmit);
+const popUpImage = new PopupWithImage('.popup.popup_zoom_img');
+const confirmPopup = initPopUpConfirm('.popup_confirm', handleConfirmSubmit);
+const cardAddSection = initCardSection([], renderCard, '.gallery');
+
+
+/** LISTENERS */
+
+/** edit user */
 popUpEditUser.setEventListeners();
 buttonEditUser.addEventListener('click', openPopUpEditUser);
+
+/** edit avatar*/
+popUpEditAvatar.setEventListeners();
+editAvatar.addEventListener('click', openPopUpEditAvatar);
+
+/** photocard */
+popUpAddCard.setEventListeners();
+popUpImage.setEventListeners();
+confirmPopup.setEventListeners();
+buttonAddCard.addEventListener('click', openPopUpAddCard);
+
+
+/** FUNC */
+
+/** edit user*/
+function openPopUpEditUser() {
+  /**  open edit-user popup and set listeners */
+  popUpEditUser.open();
+
+  /** get inputs-value from dom-data */
+  const userData = user.getUserInfo();
+
+  /** set user data to DOM*/
+  popUpEditUser.setInputValues(userData);
+
+  formUserValidation.resetValidation();
+};
 
 /** action after submitting user-form*/
 function handleUserFormSubmit(formData) {
@@ -80,28 +107,21 @@ function handleUserFormSubmit(formData) {
     });
 
   formUserValidation.resetValidation();
-}
+};
 
-function openPopUpEditUser() {
+/** edit avatar*/
+function openPopUpEditAvatar() {
   /**  open edit-user popup and set listeners */
-  popUpEditUser.open();
+  popUpEditAvatar.open();
 
   /** get inputs-value from dom-data */
   const userData = user.getUserInfo();
 
-  /** set user data to DOM*/
-  popUpEditUser.setInputValues(userData);
+  /** set data to input form (current link) */
+  popUpEditAvatar.setInputValues(userData);
 
-  formUserValidation.resetValidation();
+  formAvatarValidation.resetValidation();
 }
-
-/** EDIT AVATAR */
-const popUpEditAvatar = new initPopUp(
-  '.popup_change_avatar',
-  handleAvatarFormSubmit
-);
-popUpEditAvatar.setEventListeners();
-editAvatar.addEventListener('click', openPopUpEditAvatar);
 
 /**  submit new avatar to server and dom */
 function handleAvatarFormSubmit(formData) {
@@ -120,25 +140,38 @@ function handleAvatarFormSubmit(formData) {
   formUserValidation.resetValidation();
 }
 
-function openPopUpEditAvatar() {
-  /**  open edit-user popup and set listeners */
-  popUpEditAvatar.open();
 
-  /** get inputs-value from dom-data */
-  const userData = user.getUserInfo();
-
-  /** set data to input form (current link) */
-  popUpEditAvatar.setInputValues(userData);
-
-  formAvatarValidation.resetValidation();
+/** photocard */
+/** init popup form with inputs: for card and user */
+function initPopUp(selector, handleFormSubmit) {
+  const popUp = new PopupWithForm({
+    selector: selector,
+    handleFormSubmit: handleFormSubmit,
+  });
+  return popUp;
 }
 
-/** ADD PHOTO */
+/** init popup confirm for removing */
+function initPopUpConfirm(selector, handleFormSubmit) {
+  const popUp = new PopupConfirm({
+    selector: selector,
+    handleFormSubmit: handleFormSubmit,
+  });
+  return popUp;
+}
 
-const popUpAddCard = initPopUp('.popup_create_card', handleCardFormSubmit);
-popUpAddCard.setEventListeners();
+/** init card section for new photo: (list of items(cards), render func, section selector) */
+function initCardSection(itemList, renderer, selector) {
+  const cardSection = new Section(renderer, selector);
+  return cardSection;
+}
 
-// submit popUpAddCard
+function openPopUpAddCard() {
+  popUpAddCard.open();
+  formCardValidation.resetValidation();
+}
+
+/** submit popUpAddCard - listener action */
 function handleCardFormSubmit(formData) {
   popUpAddCard.changeButtonText('Создание...');
 
@@ -163,12 +196,7 @@ function handleCardFormSubmit(formData) {
   formCardValidation.resetValidation();
 }
 
-const popUpImage = new PopupWithImage('.popup.popup_zoom_img');
-popUpImage.setEventListeners();
-
-const confirmPopup = initPopUpConfirm('.popup_confirm', handleConfirmSubmit);
-confirmPopup.setEventListeners();
-
+/** action after confirmation of removing photo */
 function handleConfirmSubmit() {
   const photoCard = handleConfirmSubmit.photoCard;
   const photoCardId = photoCard.photoCardId;
@@ -188,22 +216,15 @@ function handleConfirmSubmit() {
     .finally(confirmPopup.changeButtonText('Да'));
 }
 
-const cardAddSection = initCardSection([], renderCard, '.gallery');
-
-/** init card section for new photo: ({list of items(cards), render func}, section selector) */
-function initCardSection(itemList, renderer, selector) {
-  const cardSection = new Section(renderer, selector);
-  return cardSection;
-}
-
 function renderCard(cardData) {
   const photoCard = createCard(cardData);
   /** add dom */
   cardAddSection.addToEnd(photoCard);
 }
 
-// create new card with listeners
+/**  create new card with listeners */
 function createCard(cardData) {
+
   const photoCard = new Card({
     data: cardData,
 
@@ -240,23 +261,17 @@ function createCard(cardData) {
   return newCard;
 }
 
-function openPopUpAddCard() {
-  popUpAddCard.open();
-  formCardValidation.resetValidation();
-}
+/**  get current user info, cards from server */
+Promise.all([api.getUserData(), api.getGalleryData()])
+  .then(([userData, cardsData]) => {
+    // user
+    user.setUserInfo({ name: userData.name, about: userData.about });
+    user.setUserAvatar({ avatar: userData.avatar });
 
-buttonAddCard.addEventListener('click', openPopUpAddCard);
-
-/** validation */
-const formUserValidation = new FormValidator(
-  validationConfig,
-  formUserInfoPopup
-);
-const formCardValidation = new FormValidator(validationConfig, formCardPopup);
-const formAvatarValidation = new FormValidator(
-  validationConfig,
-  formAvatarPopup
-);
+    // cards
+    cardAddSection.renderItems(cardsData);
+  })
+  .catch((err) => console.log(`Ошибка: ${err}`));
 
 formCardValidation.enableValidation();
 formUserValidation.enableValidation();
