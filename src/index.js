@@ -53,9 +53,9 @@ const popUpEditAvatar = new initPopUp(
 /** photocard */
 const popUpAddCard = initPopUp('.popup_create_card', handleCardFormSubmit);
 const popUpImage = new PopupWithImage('.popup.popup_zoom_img');
-const confirmPopup = initPopUpConfirm('.popup_confirm', handleConfirmSubmit);
+const confirmPopup = initPopUpConfirm('.popup_confirm');
+confirmPopup.setCallBack(handleConfirmSubmit);  /** set func for action after confirmation */
 const cardAddSection = initCardSection([], renderCard, '.gallery');
-
 
 /** LISTENERS */
 
@@ -152,10 +152,9 @@ function initPopUp(selector, handleFormSubmit) {
 }
 
 /** init popup confirm for removing */
-function initPopUpConfirm(selector, handleFormSubmit) {
+function initPopUpConfirm(selector) {
   const popUp = new PopupConfirm({
-    selector: selector,
-    handleFormSubmit: handleFormSubmit,
+    selector: selector
   });
   return popUp;
 }
@@ -197,7 +196,7 @@ function handleCardFormSubmit(formData) {
 }
 
 /** action after confirmation of removing photo */
-function handleConfirmSubmit() {
+const handleConfirmSubmit = () => {
   const photoCard = handleConfirmSubmit.photoCard;
   const photoCardId = photoCard.photoCardId;
 

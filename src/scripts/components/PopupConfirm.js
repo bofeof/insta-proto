@@ -1,19 +1,16 @@
 import { Popup } from './Popup.js';
 export class PopupConfirm extends Popup {
-  constructor({ selector, handleFormSubmit }) {
+  constructor({ selector }) {
     super(selector);
-
-    /**  submit form callback */
-    this._handleFormSubmit = handleFormSubmit;
-
-    this._submitForm = (evt) => {
-      evt.preventDefault();
-      this._handleFormSubmit();
-    };
 
     this._submitButton = this._popUpElement.querySelector(
       '.popup__submit-button'
     );
+  }
+
+  /** set func for action after confirmation */
+  setCallBack(callBackFunc) {
+    this._handleFormSubmit = callBackFunc;
   }
 
   changeButtonText(text) {
@@ -22,7 +19,10 @@ export class PopupConfirm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._submitButton.addEventListener('click', this._submitForm);
-  }
 
+    this._submitButton.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      this._handleFormSubmit();
+    });
+  }
 }
