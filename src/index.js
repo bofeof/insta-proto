@@ -25,9 +25,7 @@ import { FormValidator } from './scripts/components/FormValidator.js';
 
 import './styles/index.css';
 
-
 // CONST
-
 const api = new API(configAPI);
 
 const formUserValidation = new FormValidator(
@@ -54,7 +52,6 @@ const popUpEditAvatar = new initPopUp(
 const popUpAddCard = initPopUp('.popup_create_card', handleCardFormSubmit);
 const popUpImage = new PopupWithImage('.popup.popup_zoom_img');
 const confirmPopup = initPopUpConfirm('.popup_confirm');
-confirmPopup.setCallBack(handleConfirmSubmit);  /** set func for action after confirmation */
 const cardAddSection = initCardSection([], renderCard, '.gallery');
 
 /** LISTENERS */
@@ -72,7 +69,6 @@ popUpAddCard.setEventListeners();
 popUpImage.setEventListeners();
 confirmPopup.setEventListeners();
 buttonAddCard.addEventListener('click', openPopUpAddCard);
-
 
 /** FUNC */
 
@@ -214,6 +210,9 @@ const handleConfirmSubmit = () => {
     })
     .finally(confirmPopup.changeButtonText('Да'));
 }
+
+/** set func for action after confirmation */
+confirmPopup.setCallBack(handleConfirmSubmit);
 
 function renderCard(cardData) {
   const photoCard = createCard(cardData);

@@ -10,7 +10,7 @@ export class PopupConfirm extends Popup {
 
   /** set func for action after confirmation */
   setCallBack(callBackFunc) {
-    this._handleFormSubmit = callBackFunc;
+    this._handleConfirm = callBackFunc;
   }
 
   changeButtonText(text) {
@@ -22,7 +22,7 @@ export class PopupConfirm extends Popup {
 
     this._submitButton.addEventListener('click', (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit();
+      this._handleConfirm();
     });
   }
 }
