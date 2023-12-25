@@ -1,5 +1,5 @@
 {
-  "name": "mesto",
+  "name": "insta-proto",
   "version": "1.0.0",
   "description": "###### Прототип Инстаграма c карточками о путешествиях --- ### Технологии: 1. HTML; 2. CSS; 3. Js.",
   "main": "index.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bofeof/mesto.git"
+    "url": "git+https://github.com/bofeof/insta-proto.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bofeof/mesto/issues"
+    "url": "https://github.com/bofeof/insta-proto/issues"
   },
-  "homepage": "https://github.com/bofeof/mesto#readme",
+  "homepage": "https://github.com/bofeof/insta-proto#readme",
   "devDependencies": {
     "@babel/core": "^7.19.3",
     "@babel/preset-env": "^7.19.3",
