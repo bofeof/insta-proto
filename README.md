@@ -1,14 +1,7 @@
 
-# ✨ Mesto ✨
+# About
 
-[Mesto](https://bofeof.github.io/mesto/) is a type of Instagram prototype. Current Mesto is developed on pure OOP and not includes any additional popular libraries or frameworks (e.g React, Vue ect).
-The main aim of project is to practice programming skills: adaptive design, ES6, OOP, DOM, API, Promises, Webpack.
-
-Click this [link](https://bofeof.github.io/mesto/) to check it out.
-
-There is also Mesto with integrated React:
-[Repo: Mesto (React)](https://github.com/bofeof/mesto-react/)
-[Website: Mesto (React)](https://bofeof.github.io/mesto-react/)
+This app is an Instagram prototype. The main aim of project is to practice programming skills: adaptive design, ES6, OOP, DOM, API, Promises, Webpack (vanilla js + OOP without using any popular libraries or frameworks e.g. React, Vue ect).
 
 
 ## Available functionality runs through the server:
@@ -29,8 +22,6 @@ There is also Mesto with integrated React:
 * Webpack
 
 ## How to install and run
-
-If you don't want to clone repo just click [Mesto](https://bofeof.github.io/mesto/) or after cloning repo you can run:
 
 #### `npm run dev`
 #### `npm run build`
